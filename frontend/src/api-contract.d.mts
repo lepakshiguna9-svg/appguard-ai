@@ -13,5 +13,7 @@ export type DemoRecord = {
 };
 export function normalizeDemoPayload(payload: unknown): DemoRecord[];
 export function normalizeApplicationsPayload(payload: unknown): DemoRecord[];
+export function normalizeDisplayContext(payload: unknown, applicationIds: string[]): Map<string, Record<string, number>>;
+export function normalizeUploadPayload(payload: unknown, idPrefix?: string): Array<DemoRecord & { display: Record<string, number> }>;
 export function normalizeBatchPayload(payload: unknown, records: DemoRecord[]): DemoRecord[];
 export function readableApiError(value: unknown, fallback: string): string;

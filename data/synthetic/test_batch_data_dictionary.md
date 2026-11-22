@@ -4,6 +4,8 @@
 
 `test_batch_100_labels.json` is a separate evaluation-only sidecar keyed by `application_id`. It stores `demo_label` (`typical_synthetic` or `unusual_synthetic`) and a short construction scenario. **Do not upload this sidecar.** Labels are not present in the application JSON and are never passed to the model.
 
+`test_batch_100_display.json` is optional synthetic-only presentation context keyed by the same stable application IDs. It contains simulated age and annual income for the workbench table. These fields are not in the API batch, are not sent to the scoring API/model, and are not used as evaluation labels.
+
 ## API and model fields
 
 | Field | Type | Model input? | Purpose |
@@ -17,4 +19,4 @@
 | `submission_velocity_24h` | number | Yes | Synthetic submission count/rate feature. |
 | `recent_change_count` | number | Yes | Synthetic recent application-change count. |
 
-The model uses only the seven fields marked as model inputs. The API echoes `application_id` for matching but excludes it from preprocessing and VAE scoring. Generation uses fixed seed `20261122`; all values remain within the current API bounds. These are fictional software test fixtures, not observations about applicants. “Unusual” is a planted synthetic label, not a fraud finding or real-world outcome. Evaluation metrics on this batch do not establish accuracy, fairness, or effectiveness outside this demonstration.
+The model uses only the seven fields marked as model inputs. The API echoes `application_id` for matching but excludes it from preprocessing and VAE scoring. Generation uses fixed seed `20261122`; all model inputs remain within API bounds, but some intentionally unusual values are far outside the training distribution. The score is unbounded reconstruction MSE, so such inputs can produce very large values. These are fictional software test fixtures, not observations about applicants. “Unusual” is a planted synthetic label, not a fraud finding or real-world outcome. Evaluation metrics on this batch do not establish accuracy, fairness, or effectiveness outside this demonstration.

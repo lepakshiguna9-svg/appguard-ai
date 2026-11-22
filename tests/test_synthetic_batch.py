@@ -18,6 +18,7 @@ EXPECTED_FIELDS = {"application_id", *FEATURES}
 def test_batch_is_100_records_with_separate_demo_labels():
     applications = json.loads((DATA / "test_batch_100.json").read_text())
     sidecar = json.loads((DATA / "test_batch_100_labels.json").read_text())
+    display = json.loads((DATA / "test_batch_100_display.json").read_text())
     assert len(applications) == 100
     assert all(set(record) == EXPECTED_FIELDS for record in applications)
     assert all("demo_label" not in record and "scenario" not in record for record in applications)
@@ -27,6 +28,10 @@ def test_batch_is_100_records_with_separate_demo_labels():
     assert {item["application_id"] for item in labels} == ids
     assert sum(item["demo_label"] == "typical_synthetic" for item in labels) == 70
     assert sum(item["demo_label"] == "unusual_synthetic" for item in labels) == 30
+    assert display["synthetic_only"] is True
+    assert {item["application_id"] for item in display["records"]} == ids
+    assert all(18 <= item["applicant_age"] <= 105 for item in display["records"])
+    assert all(item["annual_income_estimate"] >= 0 for item in display["records"])
 
 
 def test_batch_values_match_model_feature_schema_and_api_bounds():

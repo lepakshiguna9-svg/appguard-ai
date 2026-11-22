@@ -85,3 +85,8 @@ def score_rows(model, pre, rows):
         ranked=sorted(({"feature":k,"residual":round(float(v[i]),5)} for k,v in byfeature.items()),key=lambda z:z["residual"],reverse=True)[:4]
         result.append((float(scores[i]), deviations, ranked))
     return result
+
+
+def review_recommended(score, threshold):
+    """Use the calibrated strict-greater-than rule shared by API and display tests."""
+    return score > threshold

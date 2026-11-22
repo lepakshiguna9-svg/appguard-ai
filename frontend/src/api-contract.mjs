@@ -103,6 +103,63 @@ export function normalizeApplicationsPayload(payload) {
   });
 }
 
+const DISPLAY_FIELDS = ['applicant_age', 'annual_income_estimate'];
+
+/** Normalize optional UI-only synthetic context without passing it to the scoring API. */
+export function normalizeDisplayContext(payload, applicationIds) {
+  if (!isObject(payload) || !Array.isArray(payload.records)) {
+    throw new Error('Synthetic display context is malformed: expected a records array.');
+  }
+  const rows = new Map();
+  for (const [index, value] of payload.records.entries()) {
+    if (!isObject(value) || typeof value.application_id !== 'string' || !value.application_id.trim()) {
+      throw new Error(`Synthetic display record ${index + 1} is missing application_id.`);
+    }
+    if (rows.has(value.application_id)) throw new Error(`Synthetic display context contains duplicate application_id "${value.application_id}".`);
+    if (typeof value.applicant_age === 'number' && (!Number.isFinite(value.applicant_age) || value.applicant_age < 18 || value.applicant_age > 105)) {
+      throw new Error(`Synthetic display record ${value.application_id} has an invalid applicant_age.`);
+    }
+    if (typeof value.annual_income_estimate === 'number' && (!Number.isFinite(value.annual_income_estimate) || value.annual_income_estimate < 0 || value.annual_income_estimate > 5_000_000)) {
+      throw new Error(`Synthetic display record ${value.application_id} has an invalid annual_income_estimate.`);
+    }
+    rows.set(value.application_id, Object.fromEntries(DISPLAY_FIELDS
+      .filter((field) => typeof value[field] === 'number' && Number.isFinite(value[field]))
+      .map((field) => [field, value[field]])));
+  }
+  const expected = new Set(applicationIds);
+  if (rows.size !== expected.size || [...expected].some((id) => !rows.has(id))) {
+    throw new Error('Synthetic display context IDs do not match the application batch.');
+  }
+  return rows;
+}
+
+/** Keep uploaded records safe for the strict API schema; optional display metadata is client-only. */
+export function normalizeUploadPayload(payload, idPrefix = 'UPLOAD') {
+  const values = Array.isArray(payload) ? payload : isObject(payload) ? payload.applications : undefined;
+  if (!Array.isArray(values) || !values.length || values.length > 100) {
+    throw new Error('Provide an array of 1–100 application objects (or {"applications": [...]}).');
+  }
+  const seen = new Set();
+  return values.map((value, index) => {
+    if (!isObject(value)) throw new Error(`Application ${index + 1} is malformed: expected an object.`);
+    const id = typeof value.application_id === 'string' && value.application_id.trim()
+      ? value.application_id.trim()
+      : `${idPrefix}-${Date.now()}-${index + 1}`;
+    if (seen.has(id)) throw new Error(`Batch contains duplicate application_id "${id}".`);
+    seen.add(id);
+    for (const field of CURRENT_REQUIRED) {
+      if (!(field in value) || value[field] === null || value[field] === '') {
+        throw new Error(`Application ${id} is missing required field "${field}".`);
+      }
+    }
+    const application = Object.fromEntries(CURRENT_FIELDS.map((field) => [field, field === 'application_id' ? id : value[field]]));
+    const display = Object.fromEntries(DISPLAY_FIELDS
+      .filter((field) => typeof value[field] === 'number' && Number.isFinite(value[field]))
+      .map((field) => [field, value[field]]));
+    return { id, application, fields: Object.entries(application).filter(([key]) => key !== 'application_id'), display };
+  });
+}
+
 function finiteNumber(value, name, id) {
   if (typeof value !== 'number' || !Number.isFinite(value)) {
     throw new Error(`Scoring response for ${id} is missing a finite ${name}.`);

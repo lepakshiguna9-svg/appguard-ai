@@ -5,7 +5,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 import numpy as np
 import torch
-from app.config import ARTIFACT_DIR, ARTIFACT_PATH, METADATA_PATH, TRAIN_PATH, CALIBRATION_PATH, MODEL_VERSION
+from app.config import ARTIFACT_DIR, ARTIFACT_PATH, METADATA_PATH, TRAIN_PATH, CALIBRATION_PATH, CATEGORICAL, FEATURES, NUMERIC, MODEL_VERSION
 from app.model import Preprocessor, VAE, read_csv, score_rows, loss_fn
 
 def train(epochs=45, batch_size=64, lr=0.001, seed=23, latent=8, hidden=(48,24)):
@@ -24,7 +24,7 @@ def train(epochs=45, batch_size=64, lr=0.001, seed=23, latent=8, hidden=(48,24))
     threshold=float(np.quantile(cal_scores,0.99,method="higher"))
     ARTIFACT_DIR.mkdir(parents=True,exist_ok=True)
     torch.save({"state_dict":model.state_dict()},ARTIFACT_PATH)
-    meta={"model_version":MODEL_VERSION,"artifact":ARTIFACT_PATH.name,"feature_schema":["policy_type","requested_coverage","deductible","payment_frequency","channel","submission_velocity_24h","recent_change_count"],"preprocessor":pre.as_dict(),"input_dim":pre.dim,"hidden_sizes":list(hidden),"latent_size":latent,"training":{"rows":len(train_rows),"epochs":epochs,"batch_size":batch_size,"learning_rate":lr,"seed":seed},"calibration":{"method":"99th percentile (higher order statistic) of baseline calibration reconstruction MSE","sample_size":len(cal_rows),"threshold":threshold,"score":"mean squared error across one-hot and standardized numeric dimensions"}}
+    meta={"model_version":MODEL_VERSION,"artifact":ARTIFACT_PATH.name,"feature_schema":FEATURES,"encoded_feature_order":CATEGORICAL+NUMERIC,"preprocessor":pre.as_dict(),"input_dim":pre.dim,"hidden_sizes":list(hidden),"latent_size":latent,"training":{"rows":len(train_rows),"epochs":epochs,"batch_size":batch_size,"learning_rate":lr,"seed":seed},"calibration":{"method":"99th percentile (higher order statistic) of baseline calibration reconstruction MSE","sample_size":len(cal_rows),"threshold":threshold,"score":"mean squared error across one-hot and standardized numeric dimensions"}}
     METADATA_PATH.write_text(json.dumps(meta,indent=2)+"\n")
     print(f"Trained {MODEL_VERSION}; threshold={threshold:.8f}; calibration n={len(cal_rows)}")
     return meta

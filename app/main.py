@@ -5,8 +5,8 @@ from pathlib import Path
 from fastapi import FastAPI, Request
 from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
-from app.config import ARTIFACT_PATH, FEATURES, METADATA_PATH, UNUSUAL_PATH, TRAIN_PATH
-from app.model import Preprocessor, VAE, read_csv, score_rows
+from app.config import ARTIFACT_PATH, CATEGORICAL, FEATURES, METADATA_PATH, NUMERIC, UNUSUAL_PATH, TRAIN_PATH
+from app.model import Preprocessor, VAE, read_csv, review_recommended, score_rows
 from app.schemas import Application, BatchRequest, BatchResponse, DemoSamples, ScoreResponse
 
 logging.basicConfig(level=logging.INFO, format="%(levelname)s %(message)s")
@@ -18,7 +18,12 @@ state={}
 async def lifespan(app):
     if not ARTIFACT_PATH.exists() or not METADATA_PATH.exists():
         raise RuntimeError("Demo model artifact missing; run python scripts/train_model.py")
-    meta=json.loads(METADATA_PATH.read_text()); pre=Preprocessor.from_dict(meta["preprocessor"])
+    meta=json.loads(METADATA_PATH.read_text())
+    if meta.get("feature_schema") != FEATURES:
+        raise RuntimeError("Model metadata feature order does not match the API scoring schema.")
+    if meta.get("encoded_feature_order") != CATEGORICAL + NUMERIC:
+        raise RuntimeError("Model metadata encoded feature order does not match the preprocessor.")
+    pre=Preprocessor.from_dict(meta["preprocessor"])
     model=VAE(meta["input_dim"],tuple(meta["hidden_sizes"]),meta["latent_size"])
     checkpoint=__import__("torch").load(ARTIFACT_PATH,map_location="cpu",weights_only=True)
     model.load_state_dict(checkpoint["state_dict"]); model.eval()
@@ -58,7 +63,7 @@ def score(applications):
     # Keep the stable ID in the response but never pass it to the VAE/preprocessor.
     rows=[a.model_dump(include=set(FEATURES)) for a in applications]
     outputs=score_rows(state["model"],state["pre"],rows); threshold=state["meta"]["calibration"]["threshold"]
-    return [ScoreResponse(application_id=application.application_id,model_version=state["meta"]["model_version"],anomaly_score=s,threshold=threshold,review_recommended=s>threshold,feature_deviations=d,top_deviations=t,disclaimer=DISCLAIMER) for application,(s,d,t) in zip(applications,outputs)]
+    return [ScoreResponse(application_id=application.application_id,model_version=state["meta"]["model_version"],anomaly_score=s,threshold=threshold,review_recommended=review_recommended(s,threshold),feature_deviations=d,top_deviations=t,disclaimer=DISCLAIMER) for application,(s,d,t) in zip(applications,outputs)]
 
 @app.post("/api/v1/score",response_model=ScoreResponse)
 def score_one(application: Application): return score([application])[0]

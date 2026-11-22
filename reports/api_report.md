@@ -1,6 +1,8 @@
 # AppGuard AI Fraud Detection API
 
-The local FastAPI service exposes OpenAPI at `/docs` and versioned JSON routes below. Application bodies contain exactly seven modeled fields; extra fields are rejected. Scores are deterministic for the loaded artifact and return the model version, finite anomaly score, calibration threshold, boolean review recommendation, per-feature deviations, and human-review disclaimer. Batch bodies accept 1–100 applications. Pydantic rejects missing, non-finite, out-of-range, or unexpected inputs. Unseen categorical values are accepted and mapped to the reserved unknown category.
+The local FastAPI service exposes OpenAPI at `/docs` and versioned JSON routes below. Application bodies contain seven modeled fields and an optional `application_id` used only for request/result matching; the identifier is excluded from preprocessing and scoring. Other unexpected fields are rejected. Scores are deterministic for the loaded artifact and return the model version, finite anomaly score, calibration threshold, boolean review recommendation, per-feature deviations, and human-review disclaimer. Batch bodies accept 1–100 applications. Pydantic rejects missing, non-finite, out-of-range, or unexpected inputs. Unseen categorical values are accepted and mapped to the reserved unknown category.
+
+The anomaly score is unbounded mean squared reconstruction error in the encoded feature space. Calibration and runtime scoring use the same `score_rows` function, model weights, training-fitted preprocessor, and encoded feature order. API startup verifies the incoming schema and encoded order in model metadata. Valid input limits can still permit values far outside the synthetic training distribution and produce very large raw scores; the service does not clip or rescale them.
 
 | Method and route | Response |
 |---|---|

@@ -1,0 +1,505 @@
+{
+  "synthetic_only": true,
+  "records": [
+    {
+      "application_id": "SYNTH-APP-001",
+      "applicant_age": 68,
+      "annual_income_estimate": 165000
+    },
+    {
+      "application_id": "SYNTH-APP-002",
+      "applicant_age": 30,
+      "annual_income_estimate": 48000
+    },
+    {
+      "application_id": "SYNTH-APP-003",
+      "applicant_age": 72,
+      "annual_income_estimate": 220000
+    },
+    {
+      "application_id": "SYNTH-APP-004",
+      "applicant_age": 25,
+      "annual_income_estimate": 220000
+    },
+    {
+      "application_id": "SYNTH-APP-005",
+      "applicant_age": 74,
+      "annual_income_estimate": 125000
+    },
+    {
+      "application_id": "SYNTH-APP-006",
+      "applicant_age": 44,
+      "annual_income_estimate": 48000
+    },
+    {
+      "application_id": "SYNTH-APP-007",
+      "applicant_age": 21,
+      "annual_income_estimate": 36000
+    },
+    {
+      "application_id": "SYNTH-APP-008",
+      "applicant_age": 26,
+      "annual_income_estimate": 125000
+    },
+    {
+      "application_id": "SYNTH-APP-009",
+      "applicant_age": 61,
+      "annual_income_estimate": 78000
+    },
+    {
+      "application_id": "SYNTH-APP-010",
+      "applicant_age": 66,
+      "annual_income_estimate": 36000
+    },
+    {
+      "application_id": "SYNTH-APP-011",
+      "applicant_age": 63,
+      "annual_income_estimate": 28000
+    },
+    {
+      "application_id": "SYNTH-APP-012",
+      "applicant_age": 38,
+      "annual_income_estimate": 95000
+    },
+    {
+      "application_id": "SYNTH-APP-013",
+      "applicant_age": 49,
+      "annual_income_estimate": 95000
+    },
+    {
+      "application_id": "SYNTH-APP-014",
+      "applicant_age": 22,
+      "annual_income_estimate": 28000
+    },
+    {
+      "application_id": "SYNTH-APP-015",
+      "applicant_age": 68,
+      "annual_income_estimate": 78000
+    },
+    {
+      "application_id": "SYNTH-APP-016",
+      "applicant_age": 23,
+      "annual_income_estimate": 165000
+    },
+    {
+      "application_id": "SYNTH-APP-017",
+      "applicant_age": 72,
+      "annual_income_estimate": 62000
+    },
+    {
+      "application_id": "SYNTH-APP-018",
+      "applicant_age": 32,
+      "annual_income_estimate": 165000
+    },
+    {
+      "application_id": "SYNTH-APP-019",
+      "applicant_age": 57,
+      "annual_income_estimate": 36000
+    },
+    {
+      "application_id": "SYNTH-APP-020",
+      "applicant_age": 66,
+      "annual_income_estimate": 95000
+    },
+    {
+      "application_id": "SYNTH-APP-021",
+      "applicant_age": 71,
+      "annual_income_estimate": 125000
+    },
+    {
+      "application_id": "SYNTH-APP-022",
+      "applicant_age": 45,
+      "annual_income_estimate": 220000
+    },
+    {
+      "application_id": "SYNTH-APP-023",
+      "applicant_age": 43,
+      "annual_income_estimate": 125000
+    },
+    {
+      "application_id": "SYNTH-APP-024",
+      "applicant_age": 45,
+      "annual_income_estimate": 28000
+    },
+    {
+      "application_id": "SYNTH-APP-025",
+      "applicant_age": 54,
+      "annual_income_estimate": 220000
+    },
+    {
+      "application_id": "SYNTH-APP-026",
+      "applicant_age": 73,
+      "annual_income_estimate": 220000
+    },
+    {
+      "application_id": "SYNTH-APP-027",
+      "applicant_age": 36,
+      "annual_income_estimate": 78000
+    },
+    {
+      "application_id": "SYNTH-APP-028",
+      "applicant_age": 39,
+      "annual_income_estimate": 48000
+    },
+    {
+      "application_id": "SYNTH-APP-029",
+      "applicant_age": 23,
+      "annual_income_estimate": 95000
+    },
+    {
+      "application_id": "SYNTH-APP-030",
+      "applicant_age": 63,
+      "annual_income_estimate": 125000
+    },
+    {
+      "application_id": "SYNTH-APP-031",
+      "applicant_age": 51,
+      "annual_income_estimate": 62000
+    },
+    {
+      "application_id": "SYNTH-APP-032",
+      "applicant_age": 37,
+      "annual_income_estimate": 28000
+    },
+    {
+      "application_id": "SYNTH-APP-033",
+      "applicant_age": 71,
+      "annual_income_estimate": 125000
+    },
+    {
+      "application_id": "SYNTH-APP-034",
+      "applicant_age": 75,
+      "annual_income_estimate": 165000
+    },
+    {
+      "application_id": "SYNTH-APP-035",
+      "applicant_age": 60,
+      "annual_income_estimate": 220000
+    },
+    {
+      "application_id": "SYNTH-APP-036",
+      "applicant_age": 68,
+      "annual_income_estimate": 220000
+    },
+    {
+      "application_id": "SYNTH-APP-037",
+      "applicant_age": 62,
+      "annual_income_estimate": 78000
+    },
+    {
+      "application_id": "SYNTH-APP-038",
+      "applicant_age": 66,
+      "annual_income_estimate": 48000
+    },
+    {
+      "application_id": "SYNTH-APP-039",
+      "applicant_age": 32,
+      "annual_income_estimate": 165000
+    },
+    {
+      "application_id": "SYNTH-APP-040",
+      "applicant_age": 48,
+      "annual_income_estimate": 220000
+    },
+    {
+      "application_id": "SYNTH-APP-041",
+      "applicant_age": 64,
+      "annual_income_estimate": 48000
+    },
+    {
+      "application_id": "SYNTH-APP-042",
+      "applicant_age": 72,
+      "annual_income_estimate": 125000
+    },
+    {
+      "application_id": "SYNTH-APP-043",
+      "applicant_age": 66,
+      "annual_income_estimate": 28000
+    },
+    {
+      "application_id": "SYNTH-APP-044",
+      "applicant_age": 28,
+      "annual_income_estimate": 78000
+    },
+    {
+      "application_id": "SYNTH-APP-045",
+      "applicant_age": 63,
+      "annual_income_estimate": 36000
+    },
+    {
+      "application_id": "SYNTH-APP-046",
+      "applicant_age": 64,
+      "annual_income_estimate": 125000
+    },
+    {
+      "application_id": "SYNTH-APP-047",
+      "applicant_age": 53,
+      "annual_income_estimate": 62000
+    },
+    {
+      "application_id": "SYNTH-APP-048",
+      "applicant_age": 41,
+      "annual_income_estimate": 48000
+    },
+    {
+      "application_id": "SYNTH-APP-049",
+      "applicant_age": 65,
+      "annual_income_estimate": 78000
+    },
+    {
+      "application_id": "SYNTH-APP-050",
+      "applicant_age": 36,
+      "annual_income_estimate": 220000
+    },
+    {
+      "application_id": "SYNTH-APP-051",
+      "applicant_age": 41,
+      "annual_income_estimate": 125000
+    },
+    {
+      "application_id": "SYNTH-APP-052",
+      "applicant_age": 31,
+      "annual_income_estimate": 220000
+    },
+    {
+      "application_id": "SYNTH-APP-053",
+      "applicant_age": 47,
+      "annual_income_estimate": 78000
+    },
+    {
+      "application_id": "SYNTH-APP-054",
+      "applicant_age": 61,
+      "annual_income_estimate": 62000
+    },
+    {
+      "application_id": "SYNTH-APP-055",
+      "applicant_age": 63,
+      "annual_income_estimate": 28000
+    },
+    {
+      "application_id": "SYNTH-APP-056",
+      "applicant_age": 45,
+      "annual_income_estimate": 62000
+    },
+    {
+      "application_id": "SYNTH-APP-057",
+      "applicant_age": 22,
+      "annual_income_estimate": 165000
+    },
+    {
+      "application_id": "SYNTH-APP-058",
+      "applicant_age": 24,
+      "annual_income_estimate": 62000
+    },
+    {
+      "application_id": "SYNTH-APP-059",
+      "applicant_age": 26,
+      "annual_income_estimate": 28000
+    },
+    {
+      "application_id": "SYNTH-APP-060",
+      "applicant_age": 41,
+      "annual_income_estimate": 28000
+    },
+    {
+      "application_id": "SYNTH-APP-061",
+      "applicant_age": 45,
+      "annual_income_estimate": 165000
+    },
+    {
+      "application_id": "SYNTH-APP-062",
+      "applicant_age": 35,
+      "annual_income_estimate": 62000
+    },
+    {
+      "application_id": "SYNTH-APP-063",
+      "applicant_age": 51,
+      "annual_income_estimate": 62000
+    },
+    {
+      "application_id": "SYNTH-APP-064",
+      "applicant_age": 62,
+      "annual_income_estimate": 62000
+    },
+    {
+      "application_id": "SYNTH-APP-065",
+      "applicant_age": 77,
+      "annual_income_estimate": 125000
+    },
+    {
+      "application_id": "SYNTH-APP-066",
+      "applicant_age": 41,
+      "annual_income_estimate": 78000
+    },
+    {
+      "application_id": "SYNTH-APP-067",
+      "applicant_age": 70,
+      "annual_income_estimate": 78000
+    },
+    {
+      "application_id": "SYNTH-APP-068",
+      "applicant_age": 37,
+      "annual_income_estimate": 28000
+    },
+    {
+      "application_id": "SYNTH-APP-069",
+      "applicant_age": 73,
+      "annual_income_estimate": 95000
+    },
+    {
+      "application_id": "SYNTH-APP-070",
+      "applicant_age": 41,
+      "annual_income_estimate": 95000
+    },
+    {
+      "application_id": "SYNTH-APP-071",
+      "applicant_age": 33,
+      "annual_income_estimate": 95000
+    },
+    {
+      "application_id": "SYNTH-APP-072",
+      "applicant_age": 49,
+      "annual_income_estimate": 48000
+    },
+    {
+      "application_id": "SYNTH-APP-073",
+      "applicant_age": 55,
+      "annual_income_estimate": 95000
+    },
+    {
+      "application_id": "SYNTH-APP-074",
+      "applicant_age": 44,
+      "annual_income_estimate": 28000
+    },
+    {
+      "application_id": "SYNTH-APP-075",
+      "applicant_age": 26,
+      "annual_income_estimate": 125000
+    },
+    {
+      "application_id": "SYNTH-APP-076",
+      "applicant_age": 60,
+      "annual_income_estimate": 220000
+    },
+    {
+      "application_id": "SYNTH-APP-077",
+      "applicant_age": 64,
+      "annual_income_estimate": 36000
+    },
+    {
+      "application_id": "SYNTH-APP-078",
+      "applicant_age": 40,
+      "annual_income_estimate": 48000
+    },
+    {
+      "application_id": "SYNTH-APP-079",
+      "applicant_age": 27,
+      "annual_income_estimate": 95000
+    },
+    {
+      "application_id": "SYNTH-APP-080",
+      "applicant_age": 32,
+      "annual_income_estimate": 95000
+    },
+    {
+      "application_id": "SYNTH-APP-081",
+      "applicant_age": 52,
+      "annual_income_estimate": 220000
+    },
+    {
+      "application_id": "SYNTH-APP-082",
+      "applicant_age": 56,
+      "annual_income_estimate": 125000
+    },
+    {
+      "application_id": "SYNTH-APP-083",
+      "applicant_age": 40,
+      "annual_income_estimate": 36000
+    },
+    {
+      "application_id": "SYNTH-APP-084",
+      "applicant_age": 35,
+      "annual_income_estimate": 28000
+    },
+    {
+      "application_id": "SYNTH-APP-085",
+      "applicant_age": 32,
+      "annual_income_estimate": 78000
+    },
+    {
+      "application_id": "SYNTH-APP-086",
+      "applicant_age": 53,
+      "annual_income_estimate": 28000
+    },
+    {
+      "application_id": "SYNTH-APP-087",
+      "applicant_age": 63,
+      "annual_income_estimate": 36000
+    },
+    {
+      "application_id": "SYNTH-APP-088",
+      "applicant_age": 37,
+      "annual_income_estimate": 62000
+    },
+    {
+      "application_id": "SYNTH-APP-089",
+      "applicant_age": 47,
+      "annual_income_estimate": 220000
+    },
+    {
+      "application_id": "SYNTH-APP-090",
+      "applicant_age": 27,
+      "annual_income_estimate": 36000
+    },
+    {
+      "application_id": "SYNTH-APP-091",
+      "applicant_age": 44,
+      "annual_income_estimate": 125000
+    },
+    {
+      "application_id": "SYNTH-APP-092",
+      "applicant_age": 61,
+      "annual_income_estimate": 62000
+    },
+    {
+      "application_id": "SYNTH-APP-093",
+      "applicant_age": 57,
+      "annual_income_estimate": 78000
+    },
+    {
+      "application_id": "SYNTH-APP-094",
+      "applicant_age": 21,
+      "annual_income_estimate": 78000
+    },
+    {
+      "application_id": "SYNTH-APP-095",
+      "applicant_age": 69,
+      "annual_income_estimate": 125000
+    },
+    {
+      "application_id": "SYNTH-APP-096",
+      "applicant_age": 55,
+      "annual_income_estimate": 48000
+    },
+    {
+      "application_id": "SYNTH-APP-097",
+      "applicant_age": 31,
+      "annual_income_estimate": 78000
+    },
+    {
+      "application_id": "SYNTH-APP-098",
+      "applicant_age": 30,
+      "annual_income_estimate": 165000
+    },
+    {
+      "application_id": "SYNTH-APP-099",
+      "applicant_age": 54,
+      "annual_income_estimate": 48000
+    },
+    {
+      "application_id": "SYNTH-APP-100",
+      "applicant_age": 60,
+      "annual_income_estimate": 78000
+    }
+  ]
+}

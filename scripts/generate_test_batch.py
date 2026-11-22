@@ -77,12 +77,15 @@ def unusual_record(rng, app_id, scenario):
 
 def generate():
     rng = random.Random(SEED)
+    display_rng = random.Random(SEED + 1)
     applications = []
     labels = []
+    display_rows = []
     for number in range(1, TYPICAL_COUNT + 1):
         app_id = f"SYNTH-APP-{number:03d}"
         applications.append(typical_record(rng, app_id))
         labels.append({"application_id": app_id, "demo_label": "typical_synthetic", "scenario": "baseline-like generated example"})
+        display_rows.append({"application_id": app_id, "applicant_age": display_rng.randint(20, 78), "annual_income_estimate": display_rng.choice([28000, 36000, 48000, 62000, 78000, 95000, 125000, 165000, 220000])})
 
     scenarios = ["coverage_scale", "submission_velocity", "deductible_outlier", "uncommon_joint_pattern"]
     for offset in range(UNUSUAL_COUNT):
@@ -91,10 +94,12 @@ def generate():
         scenario = scenarios[offset % len(scenarios)]
         applications.append(unusual_record(rng, app_id, scenario))
         labels.append({"application_id": app_id, "demo_label": "unusual_synthetic", "scenario": scenario})
+        display_rows.append({"application_id": app_id, "applicant_age": display_rng.randint(20, 78), "annual_income_estimate": display_rng.choice([28000, 36000, 48000, 62000, 78000, 95000, 125000, 165000, 220000])})
 
     DATA_DIR.mkdir(parents=True, exist_ok=True)
     (DATA_DIR / "test_batch_100.json").write_text(json.dumps(applications, indent=2) + "\n")
     (DATA_DIR / "test_batch_100_labels.json").write_text(json.dumps({"seed": SEED, "labels": labels}, indent=2) + "\n")
+    (DATA_DIR / "test_batch_100_display.json").write_text(json.dumps({"synthetic_only": True, "records": display_rows}, indent=2) + "\n")
     print(f"Generated {len(applications)} model-schema records ({TYPICAL_COUNT} typical, {UNUSUAL_COUNT} unusual) in {DATA_DIR}")
 
 

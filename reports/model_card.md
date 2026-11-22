@@ -10,11 +10,11 @@ This model is not validated or authorized for real applications, fraud determina
 
 ## Data and inputs
 
-Only deterministic synthetic data. Inputs are policy type, requested coverage, deductible, payment frequency, channel, synthetic submission velocity, and synthetic recent-change count. No identifiers, protected traits, or direct sensitive attributes are used. Some operational variables could still be inappropriate in a real context and require careful review.
+Only deterministic synthetic data. Model inputs are policy type, requested coverage, deductible, payment frequency, channel, synthetic submission velocity, and synthetic recent-change count. The API may carry an application ID for request/result matching, but it is excluded from model input. Age and income can appear as separate demo display context; they are not model inputs or evaluation labels. Some operational variables could still be inappropriate in a real context and require careful review.
 
 ## Measurement and limitations
 
-The threshold is the 99th percentile of a separate synthetic baseline calibration set. It has no demonstrated relationship to real-world risk. Scores are reconstruction errors in a learned representation; per-feature residuals are statistical differences, not causal explanations. Synthetic examples do not support claims about accuracy, precision, recall, fairness, or effectiveness. The model may be sensitive to distribution, data-quality, and category changes.
+The threshold is the 99th percentile of a separate synthetic baseline calibration set. It has no demonstrated relationship to real-world risk. Scores are unbounded reconstruction errors in a learned representation; valid inputs far outside the training range can produce very large scores. Per-feature residuals are statistical differences, not causal explanations. Synthetic examples do not support claims about accuracy, precision, recall, fairness, or effectiveness. The model may be sensitive to distribution, data-quality, and category changes.
 
 ## Human review and governance
 

@@ -79,11 +79,17 @@ Start the API, then run this from the project root:
 .venv/bin/python scripts/evaluate_synthetic_batch.py --api-url http://127.0.0.1:8000
 ```
 
-It requires `data/synthetic/test_batch_100.json`, `data/synthetic/test_batch_100_labels.json`, and a healthy API with the model loaded. The application file uses the API/model's seven supported feature fields plus `application_id`, which is tracking-only and echoed in results. The command submits only model-supported application fields and the tracking ID to `/api/v1/score/batch`; labels are read locally and joined to results by `application_id`. Labels are never sent to the API or model. The interface uses the same local files and comparison logic for its queue and summary.
+It requires `data/synthetic/test_batch_100.json`, `data/synthetic/test_batch_100_labels.json`, and a healthy API with the model loaded. The application file uses the API/model's seven supported feature fields plus `application_id`, which is tracking-only and echoed in results. The command submits only model-supported application fields and the tracking ID to `/api/v1/score/batch`; labels are read locally and joined to results by `application_id`. Labels are never sent to the API or model. The interface also reads `data/synthetic/test_batch_100_display.json` for synthetic age and income shown in the table; those fields are client-only display context.
 
 The report counts true positives (intentionally unusual and flagged), false negatives (intentionally unusual and not flagged), false positives (typical and flagged), and true negatives (typical and not flagged). Precision is `TP/(TP+FP)`, recall is `TP/(TP+FN)`, and false-positive rate is `FP/(FP+TN)`. A zero denominator is shown as `N/A`.
 
 These labels describe constructed synthetic examples, not real incidents or verified fraud. The resulting metrics demonstrate software behavior on this generated batch only; they do not estimate real-world accuracy, precision, recall, fairness, or effectiveness and must not guide adverse decisions.
+
+## Score scale and workbench controls
+
+The score is mean squared reconstruction error across one-hot categorical values and standardized numeric values. It is non-negative and mathematically unbounded. Calibration uses the same model, feature ordering, training-fitted preprocessor, transformation, and score function on held-out synthetic baseline rows. Inputs that are valid under API limits but far outside the training distribution can therefore produce large scores. The workbench shows the raw score, calibrated threshold, and score-to-threshold multiple; it does not cap or rescale scores.
+
+The workbench includes curated API scenarios, a deterministic client-generated synthetic batch, JSON upload, and a single-record synthetic scoring form. Uploaded age and income values are optional display context and are removed before scoring. Workflow choices are a local session preview only; they do not contact anyone, persist a real review state, or take an insurance action. The table also shows simulated age and income from `test_batch_100_display.json`, joined by stable application ID and never used as model features or labels.
 
 ## API summary
 
@@ -93,13 +99,13 @@ These labels describe constructed synthetic examples, not real incidents or veri
 - `POST /api/v1/score`
 - `POST /api/v1/score/batch` — accepts 1–100 records
 
-For a batch-upload test, use [`data/synthetic/test_batch_100.json`](data/synthetic/test_batch_100.json), a 100-record JSON array matching the current API application schema (70 typical-pattern and 30 intentionally unusual examples). The separate [`test_batch_100_labels.json`](data/synthetic/test_batch_100_labels.json) is for test interpretation only; do not upload it. See [`test_batch_data_dictionary.md`](data/synthetic/test_batch_data_dictionary.md) for the fields, limits, and synthetic-only caveat. API request details are also available at `/docs` and in the [API report](reports/api_report.md).
+For a batch-upload test, use [`data/synthetic/test_batch_100.json`](data/synthetic/test_batch_100.json), a 100-record JSON array matching the current API application schema (70 typical-pattern and 30 intentionally unusual examples). The separate [`test_batch_100_labels.json`](data/synthetic/test_batch_100_labels.json) is for test interpretation only; do not upload it. [`test_batch_100_display.json`](data/synthetic/test_batch_100_display.json) supplies synthetic-only table context and is also not sent for scoring. See [`test_batch_data_dictionary.md`](data/synthetic/test_batch_data_dictionary.md) for fields, limits, score-scale context, and the synthetic-only caveat. API request details are also available at `/docs` and in the [API report](reports/api_report.md).
 
 ## Project contents
 
 - `app/` API, schemas, preprocessing, model and configuration
 - `scripts/` deterministic generation, training/calibration, labeled evaluation and local launch
-- `data/synthetic/` local synthetic CSVs, the 100-record batch upload JSON, its separate labels sidecar, and data dictionaries
+- `data/synthetic/` local synthetic CSVs, the 100-record batch upload JSON, separate evaluation labels and display-only synthetic context, and data dictionaries
 - `artifacts/` versioned trained weights and preprocessing/calibration metadata
 - `frontend/` responsive, API-backed review interface
 - `tests/` automated software checks

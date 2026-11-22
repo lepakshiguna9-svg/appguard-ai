@@ -10,6 +10,15 @@
     "submission_velocity_24h",
     "recent_change_count"
   ],
+  "encoded_feature_order": [
+    "policy_type",
+    "payment_frequency",
+    "channel",
+    "requested_coverage",
+    "deductible",
+    "submission_velocity_24h",
+    "recent_change_count"
+  ],
   "preprocessor": {
     "categories": {
       "policy_type": [

@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { normalizeApplicationsPayload, normalizeBatchPayload, normalizeDemoPayload } from './api-contract.mjs';
+import { normalizeApplicationsPayload, normalizeBatchPayload, normalizeDemoPayload, normalizeDisplayContext, normalizeUploadPayload } from './api-contract.mjs';
 
 const sample = {
   application_id: 'DEMO-NORM-001', policy_type: 'auto', requested_coverage: 50000,
@@ -60,4 +60,14 @@ test('matches current batch results by application ID and strips sidecar labels 
   assert.throws(() => normalizeBatchPayload({ results: [{ anomaly_score: 0.1 }, ...validResults.slice(1)] }, records), /missing application_id/);
   const reversed = normalizeBatchPayload({ results: [...validResults].reverse() }, records);
   assert.equal(reversed.find((record) => record.id === 'APP-1').application.requested_coverage, 50000);
+});
+
+test('matches synthetic display context by ID and keeps it out of model inputs', () => {
+  const uploads = normalizeUploadPayload([{ ...sample, applicant_age: 41, annual_income_estimate: 90000, demo_label: 'unusual_synthetic' }]);
+  assert.equal(uploads[0].display.applicant_age, 41);
+  assert.equal(uploads[0].application.demo_label, undefined);
+  assert.equal(uploads[0].application.applicant_age, undefined);
+  const context = normalizeDisplayContext({ records: [{ application_id: uploads[0].id, applicant_age: 41, annual_income_estimate: 90000 }] }, [uploads[0].id]);
+  assert.equal(context.get(uploads[0].id).annual_income_estimate, 90000);
+  assert.throws(() => normalizeDisplayContext({ records: [] }, [uploads[0].id]), /IDs do not match/);
 });
