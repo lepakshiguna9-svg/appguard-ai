@@ -4,7 +4,7 @@ export type DemoRecord = {
   application: Record<string, unknown>;
   fields: [string, unknown][];
   description?: string;
-  demoGroup: 'baseline' | 'unusual_demo';
+  demoGroup?: 'baseline' | 'unusual_demo';
   score?: number;
   threshold?: number;
   review?: boolean;
@@ -12,5 +12,6 @@ export type DemoRecord = {
   scoreError?: string;
 };
 export function normalizeDemoPayload(payload: unknown): DemoRecord[];
+export function normalizeApplicationsPayload(payload: unknown): DemoRecord[];
 export function normalizeBatchPayload(payload: unknown, records: DemoRecord[]): DemoRecord[];
 export function readableApiError(value: unknown, fallback: string): string;

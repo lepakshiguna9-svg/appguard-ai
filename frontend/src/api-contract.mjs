@@ -23,6 +23,9 @@ const LEGACY_FIELDS = [
   'submission_velocity_24h',
   'recent_change_count',
 ];
+const CURRENT_FIELDS = [
+  'application_id', ...CURRENT_REQUIRED, ...CURRENT_OPTIONAL,
+];
 
 function isObject(value) {
   return value !== null && typeof value === 'object' && !Array.isArray(value);
@@ -65,7 +68,7 @@ export function normalizeDemoPayload(payload) {
         application,
         fields: Object.entries(value).filter(([key]) => key !== 'description'),
         description: typeof value.description === 'string' ? value.description : undefined,
-        demoGroup: /ANOM|UNUSUAL/i.test(id) ? 'unusual_demo' : 'baseline',
+        demoGroup: undefined,
       };
     }
 
@@ -84,6 +87,34 @@ export function normalizeDemoPayload(payload) {
       fields: Object.entries(application),
       description: undefined,
       demoGroup: value.demo_group === 'unusual_demo' ? 'unusual_demo' : 'baseline',
+    };
+  });
+}
+
+/** Convert the separate synthetic batch file into API-only records, dropping any accidental label fields. */
+export function normalizeApplicationsPayload(payload) {
+  if (!Array.isArray(payload) || payload.length !== 100) {
+    throw new Error('Synthetic evaluation batch is malformed: expected exactly 100 application records.');
+  }
+  const seen = new Set();
+  return payload.map((value, index) => {
+    if (!isObject(value)) throw new Error(`Synthetic application ${index + 1} is malformed: expected an object.`);
+    const id = value.application_id;
+    if (typeof id !== 'string' || !id.trim()) throw new Error(`Synthetic application ${index + 1} is missing application_id.`);
+    if (seen.has(id)) throw new Error(`Synthetic evaluation batch contains duplicate application_id "${id}".`);
+    seen.add(id);
+    for (const field of CURRENT_REQUIRED) {
+      if (!(field in value) || value[field] === null || value[field] === '') {
+        throw new Error(`Synthetic application ${id} is missing required field "${field}".`);
+      }
+    }
+    const application = Object.fromEntries(CURRENT_FIELDS.filter((field) => field in value).map((field) => [field, value[field]]));
+    return {
+      id,
+      application,
+      fields: Object.entries(application),
+      description: undefined,
+      demoGroup: undefined,
     };
   });
 }
@@ -114,9 +145,26 @@ export function normalizeBatchPayload(payload, records) {
     throw new Error(`Scoring returned ${payload.results.length} results for ${records.length} samples.`);
   }
 
+  const recordsHaveStableIds = records.every((record) => typeof record.application?.application_id === 'string' && record.application.application_id.length > 0);
+  const recordsById = new Map(records.map((record) => [record.application.application_id, record]));
+  const seenResultIds = new Set();
+
   return payload.results.map((value, index) => {
-    const sample = records[index];
     if (!isObject(value)) throw new Error(`Scoring result ${index + 1} is malformed.`);
+    let sample = records[index];
+    if (recordsHaveStableIds) {
+      const resultId = value.application_id;
+      if (typeof resultId !== 'string' || !resultId.trim()) {
+        throw new Error(`Scoring result ${index + 1} is missing application_id; results must be matched by stable ID.`);
+      }
+      if (seenResultIds.has(resultId)) throw new Error(`Scoring response contains duplicate application_id "${resultId}".`);
+      seenResultIds.add(resultId);
+      sample = recordsById.get(resultId);
+      if (!sample) throw new Error(`Scoring response contains an unexpected application_id "${resultId}".`);
+    } else if (typeof value.application_id === 'string' && value.application_id.trim()) {
+      const matched = recordsById.get(value.application_id);
+      if (matched) sample = matched;
+    }
     if (value.status && value.status !== 'success') {
       return { ...sample, scoreError: typeof value.error_message === 'string' && value.error_message ? value.error_message : 'The API could not score this sample.' };
     }

@@ -71,6 +71,20 @@ Render can redeploy from `main` after each push. To publish later changes, commi
 
 A trained artifact and generated CSVs are required. The tests exercise the model-backed API and frontend build. They do not evaluate real-world effectiveness.
 
+## Reproduce the labeled synthetic evaluation
+
+Start the API, then run this from the project root:
+
+```sh
+.venv/bin/python scripts/evaluate_synthetic_batch.py --api-url http://127.0.0.1:8000
+```
+
+It requires `data/synthetic/test_batch_100.json`, `data/synthetic/test_batch_100_labels.json`, and a healthy API with the model loaded. It submits only the application JSON to `/api/v1/score/batch`; labels are read locally and joined to API results by `application_id`. The interface uses the same local files and comparison logic for its queue and summary.
+
+The report counts true positives (intentionally unusual and flagged), false negatives (intentionally unusual and not flagged), false positives (typical and flagged), and true negatives (typical and not flagged). Precision is `TP/(TP+FP)`, recall is `TP/(TP+FN)`, and false-positive rate is `FP/(FP+TN)`. A zero denominator is shown as `N/A`.
+
+These labels describe constructed synthetic examples, not real incidents or verified fraud. The resulting metrics demonstrate software behavior on this generated batch only; they do not estimate real-world accuracy, precision, recall, fairness, or effectiveness and must not guide adverse decisions.
+
 ## API summary
 
 - `GET /api/v1/health`
@@ -84,7 +98,7 @@ For a batch-upload test, use [`data/synthetic/test_batch_100.json`](data/synthet
 ## Project contents
 
 - `app/` API, schemas, preprocessing, model and configuration
-- `scripts/` deterministic generation, training/calibration and local launch
+- `scripts/` deterministic generation, training/calibration, labeled evaluation and local launch
 - `data/synthetic/` local synthetic CSVs, the 100-record batch upload JSON, its separate labels sidecar, and data dictionaries
 - `artifacts/` versioned trained weights and preprocessing/calibration metadata
 - `frontend/` responsive, API-backed review interface

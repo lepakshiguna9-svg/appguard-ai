@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { normalizeBatchPayload, normalizeDemoPayload } from './api-contract.mjs';
+import { normalizeApplicationsPayload, normalizeBatchPayload, normalizeDemoPayload } from './api-contract.mjs';
 
 const sample = {
   application_id: 'DEMO-NORM-001', policy_type: 'auto', coverage_amount: 50000,
@@ -23,6 +23,7 @@ test('normalizes the documented samples response and maps the batch scoring cont
   assert.equal(scored.threshold, 0.15);
   assert.equal(scored.review, false);
   assert.deepEqual(scored.deviations[0], { feature: 'coverage_amount', residual: 0.4 });
+  assert.equal(normalizeDemoPayload({ samples: [{ ...sample, application_id: 'DEMO-ANOM-001' }] })[0].demoGroup, undefined);
 });
 
 test('continues to accept the older records response and score field names', () => {
@@ -43,5 +44,20 @@ test('returns clear errors instead of allowing malformed values to reach render 
   assert.throws(() => normalizeDemoPayload({ samples: [{ application_id: 'DEMO-X' }] }), /missing required field/);
   const records = normalizeDemoPayload({ samples: [sample] });
   assert.throws(() => normalizeBatchPayload({ results: [] }, records), /0 results for 1 samples/);
-  assert.throws(() => normalizeBatchPayload({ results: [{ anomaly_score: 'bad' }] }, records), /finite anomaly_score/);
+  assert.throws(() => normalizeBatchPayload({ results: [{ application_id: sample.application_id, anomaly_score: 'bad' }] }, records), /finite anomaly_score/);
+});
+
+test('matches current batch results by application ID and strips sidecar labels from API records', () => {
+  const input = Array.from({ length: 100 }, (_, index) => ({
+    ...sample,
+    application_id: `APP-${index + 1}`,
+    demo_label: 'unusual_synthetic',
+    scenario: 'test-only',
+  }));
+  const records = normalizeApplicationsPayload(input);
+  assert.equal(records[0].application.demo_label, undefined);
+  assert.equal(records[0].application.scenario, undefined);
+  const validResults = records.map((record) => ({ application_id: record.id, anomaly_score: 0.1, calibrated_threshold: 0.2, review_recommended: false }));
+  assert.throws(() => normalizeBatchPayload({ results: [{ ...validResults[0], application_id: 'WRONG-ID' }, ...validResults.slice(1)] }, records), /unexpected application_id/);
+  assert.throws(() => normalizeBatchPayload({ results: [{ anomaly_score: 0.1 }, ...validResults.slice(1)] }, records), /missing application_id/);
 });
