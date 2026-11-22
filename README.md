@@ -51,6 +51,16 @@ Open <http://127.0.0.1:5173>. The API is at <http://127.0.0.1:8000>; interactive
 
 If a port is occupied, set `APPGUARD_API_PORT=8001` for the backend and set `APPGUARD_API_TARGET=http://127.0.0.1:8001` for the frontend, or set `APPGUARD_WEB_PORT=5174` if the UI port is occupied. Check what owns a port with `lsof -nP -iTCP:8000 -sTCP:LISTEN` before taking action; do not blindly kill processes.
 
+## Deploy a public demo
+
+The Docker image builds the React frontend and serves it from the FastAPI service, so the demo needs only one hosted web service. The service listens on Render's `PORT` environment variable and reports health at `/api/v1/health`.
+
+1. In Render, choose **New → Web Service**, connect the GitHub repository `lepakshiguna9-svg/appguard-ai`, and select the `main` branch.
+2. Select **Docker** as the runtime, keep the Dockerfile path as `./Dockerfile`, and create the service. No environment variables are required.
+3. When deployment finishes, open the generated `https://…onrender.com` address. The UI and API are served from that same address.
+
+Render can redeploy from `main` after each push. To publish later changes, commit and push them to GitHub; wait for the new deployment to finish, then refresh the same URL. This is an educational demo using synthetic data, not a production fraud decision system.
+
 ## Verify
 
 ```sh

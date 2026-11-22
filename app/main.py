@@ -1,8 +1,10 @@
 """Versioned API for synthetic educational anomaly scoring."""
 import json, logging
 from contextlib import asynccontextmanager
+from pathlib import Path
 from fastapi import FastAPI, Request
-from fastapi.responses import JSONResponse
+from fastapi.responses import FileResponse, JSONResponse
+from fastapi.staticfiles import StaticFiles
 from app.config import ARTIFACT_PATH, METADATA_PATH, UNUSUAL_PATH, TRAIN_PATH
 from app.model import Preprocessor, VAE, read_csv, score_rows
 from app.schemas import Application, BatchRequest, BatchResponse, DemoSamples, ScoreResponse
@@ -25,6 +27,11 @@ async def lifespan(app):
     yield
 
 app=FastAPI(title="AppGuard AI — Synthetic Application Anomaly Demo",version="1.0.0",description="Educational anomaly scoring only. No fraud finding or automated adverse decision.",lifespan=lifespan)
+
+WEB_DIST = Path(__file__).resolve().parent.parent / "frontend" / "dist"
+WEB_ASSETS = WEB_DIST / "assets"
+if WEB_ASSETS.is_dir():
+    app.mount("/assets", StaticFiles(directory=WEB_ASSETS), name="assets")
 
 @app.exception_handler(Exception)
 async def safe_error(request: Request, exc: Exception):
@@ -57,3 +64,17 @@ def score_one(application: Application): return score([application])[0]
 
 @app.post("/api/v1/score/batch",response_model=BatchResponse)
 def score_batch(request: BatchRequest): return {"results":score(request.applications)}
+
+@app.get("/{web_path:path}", include_in_schema=False)
+def serve_frontend(web_path: str):
+    if web_path.startswith("api/") or web_path == "api":
+        return JSONResponse(status_code=404, content={"detail":"Not found"})
+    requested = (WEB_DIST / web_path).resolve()
+    if WEB_DIST.resolve() not in requested.parents and requested != WEB_DIST.resolve():
+        return JSONResponse(status_code=404, content={"detail":"Not found"})
+    if requested.is_file():
+        return FileResponse(requested)
+    index = WEB_DIST / "index.html"
+    if index.is_file():
+        return FileResponse(index)
+    return JSONResponse(status_code=404, content={"detail":"Frontend build is missing"})
