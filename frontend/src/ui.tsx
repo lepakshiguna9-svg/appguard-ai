@@ -172,7 +172,7 @@ export default function App() {
         </div>}
         {status === 'ready' && rows.map((row) => <button className={`record ${selected === row.id ? 'selected' : ''}`} key={row.id} onClick={() => setSelected(row.id)}>
           <div className="record-main"><b>{row.id}</b><span className="truth-badge">{row.demoLabel === 'unusual_synthetic' ? 'Intentionally unusual' : 'Typical synthetic'}</span><span className={`badge ${row.review ? 'review' : ''}`}>{row.review ? 'Review suggested' : 'Within range'}</span></div>
-          <div className="record-meta">{String(row.application.policy_type ?? 'Application')} · {formatField('coverage_amount', row.application.coverage_amount)} coverage · {outcomeText(row.evaluationOutcome)}</div>
+          <div className="record-meta">{String(row.application.policy_type ?? 'Application')} · {formatField('requested_coverage', row.application.requested_coverage)} coverage · {outcomeText(row.evaluationOutcome)}</div>
           <div className="scoreline"><span>ANOMALY SCORE</span><strong>{row.score === undefined ? '—' : row.score.toFixed(5)}</strong><span className="track"><i style={{ width: `${row.score === undefined ? 0 : Math.max(2, Math.min(100, (row.score / (row.threshold || 1)) * 50))}%` }} /></span></div>
         </button>)}
         <div className="upload"><label htmlFor="jsonfile">Score a JSON batch</label><input id="jsonfile" type="file" accept="application/json,.json" onChange={(event) => void scoreUpload(event.target.files?.[0])} /><small>1–100 synthetic application objects · 250 KB max · scored in memory, not retained</small>{upload && <p className="success">{upload}</p>}{error && status === 'ready' && <p className="error-text" role="alert">{error}</p>}</div>

@@ -3,26 +3,24 @@ import test from 'node:test';
 import { normalizeApplicationsPayload, normalizeBatchPayload, normalizeDemoPayload } from './api-contract.mjs';
 
 const sample = {
-  application_id: 'DEMO-NORM-001', policy_type: 'auto', coverage_amount: 50000,
-  deductible_amount: 500, premium_frequency: 'monthly', application_channel: 'online_direct',
-  applicant_age: 36, annual_income_estimate: 78000, prior_application_count: 0,
-  recent_address_changes_count: 0, property_or_vehicle_age: 4,
-  beneficiary_relation: 'spouse', declared_credit_tier: 'good', description: 'Synthetic baseline sample',
+  application_id: 'DEMO-NORM-001', policy_type: 'auto', requested_coverage: 50000,
+  deductible: 500, payment_frequency: 'monthly', channel: 'web',
+  submission_velocity_24h: 1, recent_change_count: 0,
 };
 
-test('normalizes the documented samples response and maps the batch scoring contract', () => {
+test('normalizes model-supported fields and maps the batch scoring contract', () => {
   const records = normalizeDemoPayload({ count: 1, samples: [sample], disclaimer: 'synthetic' });
   assert.equal(records[0].id, 'DEMO-NORM-001');
-  assert.equal(records[0].application.coverage_amount, 50000);
+  assert.equal(records[0].application.requested_coverage, 50000);
   const [scored] = normalizeBatchPayload({ results: [{
-    status: 'success', application_id: records[0].id, anomaly_score: 0.09,
-    calibrated_threshold: 0.15, review_recommended: false,
-    top_deviations: [{ feature_name: 'coverage_amount', reconstruction_error: 0.4 }],
+    application_id: records[0].id, anomaly_score: 0.09,
+    threshold: 0.15, review_recommended: false,
+    top_deviations: [{ feature: 'requested_coverage', residual: 0.4 }],
   }] }, records);
   assert.equal(scored.score, 0.09);
   assert.equal(scored.threshold, 0.15);
   assert.equal(scored.review, false);
-  assert.deepEqual(scored.deviations[0], { feature: 'coverage_amount', residual: 0.4 });
+  assert.deepEqual(scored.deviations[0], { feature: 'requested_coverage', residual: 0.4 });
   assert.equal(normalizeDemoPayload({ samples: [{ ...sample, application_id: 'DEMO-ANOM-001' }] })[0].demoGroup, undefined);
 });
 
@@ -57,7 +55,9 @@ test('matches current batch results by application ID and strips sidecar labels 
   const records = normalizeApplicationsPayload(input);
   assert.equal(records[0].application.demo_label, undefined);
   assert.equal(records[0].application.scenario, undefined);
-  const validResults = records.map((record) => ({ application_id: record.id, anomaly_score: 0.1, calibrated_threshold: 0.2, review_recommended: false }));
+  const validResults = records.map((record) => ({ application_id: record.id, anomaly_score: 0.1, threshold: 0.2, review_recommended: false }));
   assert.throws(() => normalizeBatchPayload({ results: [{ ...validResults[0], application_id: 'WRONG-ID' }, ...validResults.slice(1)] }, records), /unexpected application_id/);
   assert.throws(() => normalizeBatchPayload({ results: [{ anomaly_score: 0.1 }, ...validResults.slice(1)] }, records), /missing application_id/);
+  const reversed = normalizeBatchPayload({ results: [...validResults].reverse() }, records);
+  assert.equal(reversed.find((record) => record.id === 'APP-1').application.requested_coverage, 50000);
 });

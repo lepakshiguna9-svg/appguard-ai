@@ -1,21 +1,5 @@
 const CURRENT_REQUIRED = [
   'policy_type',
-  'coverage_amount',
-  'deductible_amount',
-  'premium_frequency',
-  'application_channel',
-  'applicant_age',
-  'annual_income_estimate',
-];
-const CURRENT_OPTIONAL = [
-  'prior_application_count',
-  'recent_address_changes_count',
-  'property_or_vehicle_age',
-  'beneficiary_relation',
-  'declared_credit_tier',
-];
-const LEGACY_FIELDS = [
-  'policy_type',
   'requested_coverage',
   'deductible',
   'payment_frequency',
@@ -24,7 +8,7 @@ const LEGACY_FIELDS = [
   'recent_change_count',
 ];
 const CURRENT_FIELDS = [
-  'application_id', ...CURRENT_REQUIRED, ...CURRENT_OPTIONAL,
+  'application_id', ...CURRENT_REQUIRED,
 ];
 
 function isObject(value) {
@@ -60,7 +44,7 @@ export function normalizeDemoPayload(payload) {
         }
       }
       const application = { application_id: id };
-      for (const field of [...CURRENT_REQUIRED, ...CURRENT_OPTIONAL]) {
+      for (const field of CURRENT_REQUIRED) {
         if (field in value) application[field] = value[field];
       }
       return {
@@ -76,11 +60,11 @@ export function normalizeDemoPayload(payload) {
     if (typeof id !== 'string' || !id.trim()) {
       throw new Error(`Demo record ${index + 1} is missing its sample_id.`);
     }
-    const missing = LEGACY_FIELDS.filter((field) => !(field in value));
+    const missing = CURRENT_REQUIRED.filter((field) => !(field in value));
     if (missing.length) {
       throw new Error(`Demo record ${id} is missing required field${missing.length > 1 ? 's' : ''}: ${missing.join(', ')}.`);
     }
-    const application = Object.fromEntries(LEGACY_FIELDS.map((field) => [field, value[field]]));
+    const application = Object.fromEntries(CURRENT_REQUIRED.map((field) => [field, value[field]]));
     return {
       id,
       application,

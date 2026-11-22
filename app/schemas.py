@@ -3,6 +3,8 @@ from pydantic import BaseModel, ConfigDict, Field, FiniteFloat
 
 class Application(BaseModel):
     model_config = ConfigDict(extra="forbid")
+    # Tracking only: score() excludes this identifier from model input features.
+    application_id: str | None = Field(default=None, min_length=1, max_length=100)
     policy_type: str = Field(min_length=1,max_length=40)
     requested_coverage: FiniteFloat = Field(gt=0,le=100_000_000)
     deductible: FiniteFloat = Field(ge=0,le=10_000_000)
@@ -18,6 +20,7 @@ class Residual(BaseModel):
     feature: str
     residual: float
 class ScoreResponse(BaseModel):
+    application_id: str | None = None
     model_version: str
     anomaly_score: float
     threshold: float

@@ -1,4 +1,4 @@
-"""Generate a reproducible 100-record synthetic batch for AppGuard's current API."""
+"""Generate a reproducible 100-record batch using the VAE's current API feature schema."""
 import json
 import random
 from pathlib import Path
@@ -8,100 +8,70 @@ DATA_DIR = ROOT / "data" / "synthetic"
 SEED = 20261122
 TYPICAL_COUNT = 70
 UNUSUAL_COUNT = 30
-
-POLICY_TYPES = ["auto", "homeowners", "term_life", "renters", "commercial_property"]
-FREQUENCIES = ["monthly", "quarterly", "semi_annual", "annual"]
-CHANNELS = ["online_direct", "independent_broker", "captive_agent", "aggregator_partner", "mobile_app"]
-BENEFICIARIES = ["self", "spouse", "child", "parent", "business_partner", "other"]
-CREDIT_TIERS = ["excellent", "good", "fair", "limited_history"]
-
-# The API accepts application_id for tracking; it is an identifier, never a model feature.
-SCORING_FIELDS = [
-    "application_id", "policy_type", "coverage_amount", "deductible_amount",
-    "premium_frequency", "application_channel", "applicant_age",
-    "annual_income_estimate", "prior_application_count",
-    "recent_address_changes_count", "property_or_vehicle_age",
-    "beneficiary_relation", "declared_credit_tier",
+POLICY_TYPES = ["auto", "home", "renters"]
+FREQUENCIES = ["monthly", "quarterly", "annual"]
+CHANNELS = ["agent", "web", "phone"]
+FEATURE_FIELDS = [
+    "policy_type", "requested_coverage", "deductible", "payment_frequency",
+    "channel", "submission_velocity_24h", "recent_change_count",
 ]
 
 
-def rounded_amount(rng, low, high, step=500):
-    raw = rng.randint(low // step, high // step) * step
-    return float(raw)
-
-
 def typical_record(rng, app_id):
-    policy = rng.choices(POLICY_TYPES, weights=[42, 24, 12, 14, 8], k=1)[0]
+    policy = rng.choices(POLICY_TYPES, weights=[50, 30, 20], k=1)[0]
     ranges = {
-        "auto": ((15000, 150000), (250, 2500)),
-        "homeowners": ((100000, 900000), (500, 5000)),
-        "term_life": ((100000, 1000000), (0, 0)),
-        "renters": ((15000, 70000), (0, 1000)),
-        "commercial_property": ((250000, 2500000), (1000, 25000)),
+        "auto": ((8000, 80000), (250, 2500)),
+        "home": ((150000, 700000), (500, 5000)),
+        "renters": ((10000, 60000), (0, 1000)),
     }
     coverage_range, deductible_range = ranges[policy]
-    coverage = rounded_amount(rng, *coverage_range, step=1000 if policy in {"homeowners", "commercial_property"} else 500)
-    if deductible_range[0] == deductible_range[1]:
-        deductible = 0.0
-    else:
-        deductible = rounded_amount(rng, *deductible_range, step=250)
-    age = rng.randint(21, 78)
+    coverage = rng.randint(*coverage_range)
+    deductible = rng.randint(*deductible_range)
     return {
         "application_id": app_id,
         "policy_type": policy,
-        "coverage_amount": coverage,
-        "deductible_amount": deductible,
-        "premium_frequency": rng.choices(FREQUENCIES, weights=[48, 18, 8, 26], k=1)[0],
-        "application_channel": rng.choices(CHANNELS, weights=[32, 24, 20, 14, 10], k=1)[0],
-        "applicant_age": float(age),
-        "annual_income_estimate": float(rng.choice([28000, 36000, 48000, 62000, 78000, 95000, 125000, 165000, 220000, 310000])),
-        "prior_application_count": float(rng.randint(0, 3)),
-        "recent_address_changes_count": float(rng.choices([0, 1, 2], weights=[72, 23, 5], k=1)[0]),
-        "property_or_vehicle_age": float(rng.randint(0, 35)),
-        "beneficiary_relation": rng.choices(BENEFICIARIES, weights=[40, 35, 10, 5, 2, 8], k=1)[0],
-        "declared_credit_tier": rng.choices(CREDIT_TIERS, weights=[20, 45, 25, 10], k=1)[0],
+        "requested_coverage": float(coverage),
+        "deductible": float(deductible),
+        "payment_frequency": rng.choices(FREQUENCIES, weights=[55, 20, 25], k=1)[0],
+        "channel": rng.choices(CHANNELS, weights=[45, 40, 15], k=1)[0],
+        "submission_velocity_24h": float(rng.choices([0, 1, 2, 3, 4], weights=[35, 34, 18, 9, 4], k=1)[0]),
+        "recent_change_count": float(rng.choices([0, 1, 2, 3, 4], weights=[42, 30, 16, 8, 4], k=1)[0]),
     }
 
 
 def unusual_record(rng, app_id, scenario):
-    if scenario == "coverage_income_gap":
+    if scenario == "coverage_scale":
         return {
-            "application_id": app_id, "policy_type": "term_life",
-            "coverage_amount": rounded_amount(rng, 2500000, 8000000, 50000), "deductible_amount": 0.0,
-            "premium_frequency": "monthly", "application_channel": "online_direct",
-            "applicant_age": float(rng.randint(18, 26)), "annual_income_estimate": float(rng.randint(0, 30000)),
-            "prior_application_count": float(rng.randint(0, 1)), "recent_address_changes_count": float(rng.randint(0, 2)),
-            "property_or_vehicle_age": 0.0, "beneficiary_relation": "other", "declared_credit_tier": "limited_history",
+            "application_id": app_id, "policy_type": rng.choice(["auto", "renters"]),
+            "requested_coverage": float(rng.randint(2_000_000, 50_000_000)),
+            "deductible": float(rng.choice([0, 50, 100])), "payment_frequency": "monthly",
+            "channel": rng.choice(CHANNELS), "submission_velocity_24h": float(rng.randint(0, 3)),
+            "recent_change_count": float(rng.randint(0, 3)),
         }
-    if scenario == "application_velocity":
+    if scenario == "submission_velocity":
         return {
-            "application_id": app_id, "policy_type": "auto",
-            "coverage_amount": rounded_amount(rng, 30000, 200000), "deductible_amount": float(rng.choice([0, 250, 500])),
-            "premium_frequency": "monthly", "application_channel": rng.choice(["aggregator_partner", "mobile_app"]),
-            "applicant_age": float(rng.randint(22, 40)), "annual_income_estimate": float(rng.randint(20000, 100000)),
-            "prior_application_count": float(rng.randint(12, 50)), "recent_address_changes_count": float(rng.randint(4, 20)),
-            "property_or_vehicle_age": float(rng.randint(0, 12)), "beneficiary_relation": "self",
-            "declared_credit_tier": rng.choice(["fair", "limited_history"]),
+            "application_id": app_id, "policy_type": rng.choice(POLICY_TYPES),
+            "requested_coverage": float(rng.randint(1000, 50000)), "deductible": float(rng.randint(0, 500)),
+            "payment_frequency": "monthly", "channel": rng.choice(["web", "phone"]),
+            "submission_velocity_24h": float(rng.randint(100, 1000)),
+            "recent_change_count": float(rng.randint(50, 500)),
         }
-    if scenario == "channel_scale_mismatch":
+    if scenario == "deductible_outlier":
         return {
-            "application_id": app_id, "policy_type": "commercial_property",
-            "coverage_amount": rounded_amount(rng, 2500000, 10000000, 50000), "deductible_amount": float(rng.choice([0, 250, 500, 1000])),
-            "premium_frequency": "monthly", "application_channel": "mobile_app",
-            "applicant_age": float(rng.randint(18, 25)), "annual_income_estimate": float(rng.randint(0, 40000)),
-            "prior_application_count": float(rng.randint(5, 50)), "recent_address_changes_count": float(rng.randint(3, 15)),
-            "property_or_vehicle_age": float(rng.randint(0, 5)), "beneficiary_relation": rng.choice(["other", "business_partner"]),
-            "declared_credit_tier": rng.choice(["fair", "limited_history"]),
+            "application_id": app_id, "policy_type": "home",
+            "requested_coverage": float(rng.randint(100_000, 800_000)),
+            "deductible": float(rng.randint(500_000, 5_000_000)),
+            "payment_frequency": "monthly", "channel": rng.choice(CHANNELS),
+            "submission_velocity_24h": float(rng.randint(0, 4)),
+            "recent_change_count": float(rng.randint(0, 4)),
         }
-    # A boundary-valid, unusual deductible and older insured property combination.
+    # A valid but uncommon joint pattern using only categories present in training.
     return {
-        "application_id": app_id, "policy_type": "homeowners",
-        "coverage_amount": rounded_amount(rng, 150000, 1500000, 5000), "deductible_amount": float(rng.randint(80000, 100000)),
-        "premium_frequency": "monthly", "application_channel": rng.choice(["online_direct", "aggregator_partner"]),
-        "applicant_age": float(rng.randint(25, 65)), "annual_income_estimate": float(rng.randint(25000, 120000)),
-        "prior_application_count": float(rng.randint(0, 2)), "recent_address_changes_count": float(rng.randint(0, 3)),
-        "property_or_vehicle_age": float(rng.randint(60, 100)), "beneficiary_relation": rng.choice(["spouse", "other"]),
-        "declared_credit_tier": rng.choice(["fair", "limited_history"]),
+        "application_id": app_id, "policy_type": "renters",
+        "requested_coverage": float(rng.randint(500_000, 3_000_000)),
+        "deductible": float(rng.randint(0, 100)), "payment_frequency": "annual",
+        "channel": "phone", "submission_velocity_24h": float(rng.randint(40, 150)),
+        "recent_change_count": float(rng.randint(15, 80)),
     }
 
 
@@ -114,7 +84,7 @@ def generate():
         applications.append(typical_record(rng, app_id))
         labels.append({"application_id": app_id, "demo_label": "typical_synthetic", "scenario": "baseline-like generated example"})
 
-    scenarios = ["coverage_income_gap", "application_velocity", "channel_scale_mismatch", "deductible_property_age"]
+    scenarios = ["coverage_scale", "submission_velocity", "deductible_outlier", "uncommon_joint_pattern"]
     for offset in range(UNUSUAL_COUNT):
         number = TYPICAL_COUNT + offset + 1
         app_id = f"SYNTH-APP-{number:03d}"
@@ -123,9 +93,9 @@ def generate():
         labels.append({"application_id": app_id, "demo_label": "unusual_synthetic", "scenario": scenario})
 
     DATA_DIR.mkdir(parents=True, exist_ok=True)
-    (DATA_DIR / "test_batch_100.json").write_text(json.dumps(applications, indent=2, ensure_ascii=False) + "\n")
-    (DATA_DIR / "test_batch_100_labels.json").write_text(json.dumps({"seed": SEED, "labels": labels}, indent=2, ensure_ascii=False) + "\n")
-    print(f"Generated {len(applications)} synthetic API records ({TYPICAL_COUNT} typical, {UNUSUAL_COUNT} unusual) in {DATA_DIR}")
+    (DATA_DIR / "test_batch_100.json").write_text(json.dumps(applications, indent=2) + "\n")
+    (DATA_DIR / "test_batch_100_labels.json").write_text(json.dumps({"seed": SEED, "labels": labels}, indent=2) + "\n")
+    print(f"Generated {len(applications)} model-schema records ({TYPICAL_COUNT} typical, {UNUSUAL_COUNT} unusual) in {DATA_DIR}")
 
 
 if __name__ == "__main__":

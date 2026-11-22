@@ -354,152 +354,152 @@
     {
       "application_id": "SYNTH-APP-071",
       "demo_label": "unusual_synthetic",
-      "scenario": "coverage_income_gap"
+      "scenario": "coverage_scale"
     },
     {
       "application_id": "SYNTH-APP-072",
       "demo_label": "unusual_synthetic",
-      "scenario": "application_velocity"
+      "scenario": "submission_velocity"
     },
     {
       "application_id": "SYNTH-APP-073",
       "demo_label": "unusual_synthetic",
-      "scenario": "channel_scale_mismatch"
+      "scenario": "deductible_outlier"
     },
     {
       "application_id": "SYNTH-APP-074",
       "demo_label": "unusual_synthetic",
-      "scenario": "deductible_property_age"
+      "scenario": "uncommon_joint_pattern"
     },
     {
       "application_id": "SYNTH-APP-075",
       "demo_label": "unusual_synthetic",
-      "scenario": "coverage_income_gap"
+      "scenario": "coverage_scale"
     },
     {
       "application_id": "SYNTH-APP-076",
       "demo_label": "unusual_synthetic",
-      "scenario": "application_velocity"
+      "scenario": "submission_velocity"
     },
     {
       "application_id": "SYNTH-APP-077",
       "demo_label": "unusual_synthetic",
-      "scenario": "channel_scale_mismatch"
+      "scenario": "deductible_outlier"
     },
     {
       "application_id": "SYNTH-APP-078",
       "demo_label": "unusual_synthetic",
-      "scenario": "deductible_property_age"
+      "scenario": "uncommon_joint_pattern"
     },
     {
       "application_id": "SYNTH-APP-079",
       "demo_label": "unusual_synthetic",
-      "scenario": "coverage_income_gap"
+      "scenario": "coverage_scale"
     },
     {
       "application_id": "SYNTH-APP-080",
       "demo_label": "unusual_synthetic",
-      "scenario": "application_velocity"
+      "scenario": "submission_velocity"
     },
     {
       "application_id": "SYNTH-APP-081",
       "demo_label": "unusual_synthetic",
-      "scenario": "channel_scale_mismatch"
+      "scenario": "deductible_outlier"
     },
     {
       "application_id": "SYNTH-APP-082",
       "demo_label": "unusual_synthetic",
-      "scenario": "deductible_property_age"
+      "scenario": "uncommon_joint_pattern"
     },
     {
       "application_id": "SYNTH-APP-083",
       "demo_label": "unusual_synthetic",
-      "scenario": "coverage_income_gap"
+      "scenario": "coverage_scale"
     },
     {
       "application_id": "SYNTH-APP-084",
       "demo_label": "unusual_synthetic",
-      "scenario": "application_velocity"
+      "scenario": "submission_velocity"
     },
     {
       "application_id": "SYNTH-APP-085",
       "demo_label": "unusual_synthetic",
-      "scenario": "channel_scale_mismatch"
+      "scenario": "deductible_outlier"
     },
     {
       "application_id": "SYNTH-APP-086",
       "demo_label": "unusual_synthetic",
-      "scenario": "deductible_property_age"
+      "scenario": "uncommon_joint_pattern"
     },
     {
       "application_id": "SYNTH-APP-087",
       "demo_label": "unusual_synthetic",
-      "scenario": "coverage_income_gap"
+      "scenario": "coverage_scale"
     },
     {
       "application_id": "SYNTH-APP-088",
       "demo_label": "unusual_synthetic",
-      "scenario": "application_velocity"
+      "scenario": "submission_velocity"
     },
     {
       "application_id": "SYNTH-APP-089",
       "demo_label": "unusual_synthetic",
-      "scenario": "channel_scale_mismatch"
+      "scenario": "deductible_outlier"
     },
     {
       "application_id": "SYNTH-APP-090",
       "demo_label": "unusual_synthetic",
-      "scenario": "deductible_property_age"
+      "scenario": "uncommon_joint_pattern"
     },
     {
       "application_id": "SYNTH-APP-091",
       "demo_label": "unusual_synthetic",
-      "scenario": "coverage_income_gap"
+      "scenario": "coverage_scale"
     },
     {
       "application_id": "SYNTH-APP-092",
       "demo_label": "unusual_synthetic",
-      "scenario": "application_velocity"
+      "scenario": "submission_velocity"
     },
     {
       "application_id": "SYNTH-APP-093",
       "demo_label": "unusual_synthetic",
-      "scenario": "channel_scale_mismatch"
+      "scenario": "deductible_outlier"
     },
     {
       "application_id": "SYNTH-APP-094",
       "demo_label": "unusual_synthetic",
-      "scenario": "deductible_property_age"
+      "scenario": "uncommon_joint_pattern"
     },
     {
       "application_id": "SYNTH-APP-095",
       "demo_label": "unusual_synthetic",
-      "scenario": "coverage_income_gap"
+      "scenario": "coverage_scale"
     },
     {
       "application_id": "SYNTH-APP-096",
       "demo_label": "unusual_synthetic",
-      "scenario": "application_velocity"
+      "scenario": "submission_velocity"
     },
     {
       "application_id": "SYNTH-APP-097",
       "demo_label": "unusual_synthetic",
-      "scenario": "channel_scale_mismatch"
+      "scenario": "deductible_outlier"
     },
     {
       "application_id": "SYNTH-APP-098",
       "demo_label": "unusual_synthetic",
-      "scenario": "deductible_property_age"
+      "scenario": "uncommon_joint_pattern"
     },
     {
       "application_id": "SYNTH-APP-099",
       "demo_label": "unusual_synthetic",
-      "scenario": "coverage_income_gap"
+      "scenario": "coverage_scale"
     },
     {
       "application_id": "SYNTH-APP-100",
       "demo_label": "unusual_synthetic",
-      "scenario": "application_velocity"
+      "scenario": "submission_velocity"
     }
   ]
 }

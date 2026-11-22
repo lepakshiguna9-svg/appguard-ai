@@ -3,7 +3,13 @@ from app.evaluation import evaluate_labeled_results
 
 
 def result(app_id, review):
-    return {"application_id": app_id, "status": "success", "review_recommended": review}
+    return {
+        "application_id": app_id,
+        "status": "success",
+        "anomaly_score": 0.1,
+        "threshold": 0.2,
+        "review_recommended": review,
+    }
 
 
 def labels(*pairs):

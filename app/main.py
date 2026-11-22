@@ -5,7 +5,7 @@ from pathlib import Path
 from fastapi import FastAPI, Request
 from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
-from app.config import ARTIFACT_PATH, METADATA_PATH, UNUSUAL_PATH, TRAIN_PATH
+from app.config import ARTIFACT_PATH, FEATURES, METADATA_PATH, UNUSUAL_PATH, TRAIN_PATH
 from app.model import Preprocessor, VAE, read_csv, score_rows
 from app.schemas import Application, BatchRequest, BatchResponse, DemoSamples, ScoreResponse
 
@@ -55,9 +55,10 @@ def demo_samples():
     return {"records":records}
 
 def score(applications):
-    rows=[a.model_dump() for a in applications]
+    # Keep the stable ID in the response but never pass it to the VAE/preprocessor.
+    rows=[a.model_dump(include=set(FEATURES)) for a in applications]
     outputs=score_rows(state["model"],state["pre"],rows); threshold=state["meta"]["calibration"]["threshold"]
-    return [ScoreResponse(model_version=state["meta"]["model_version"],anomaly_score=s,threshold=threshold,review_recommended=s>threshold,feature_deviations=d,top_deviations=t,disclaimer=DISCLAIMER) for s,d,t in outputs]
+    return [ScoreResponse(application_id=application.application_id,model_version=state["meta"]["model_version"],anomaly_score=s,threshold=threshold,review_recommended=s>threshold,feature_deviations=d,top_deviations=t,disclaimer=DISCLAIMER) for application,(s,d,t) in zip(applications,outputs)]
 
 @app.post("/api/v1/score",response_model=ScoreResponse)
 def score_one(application: Application): return score([application])[0]

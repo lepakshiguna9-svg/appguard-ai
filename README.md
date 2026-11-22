@@ -79,7 +79,7 @@ Start the API, then run this from the project root:
 .venv/bin/python scripts/evaluate_synthetic_batch.py --api-url http://127.0.0.1:8000
 ```
 
-It requires `data/synthetic/test_batch_100.json`, `data/synthetic/test_batch_100_labels.json`, and a healthy API with the model loaded. It submits only the application JSON to `/api/v1/score/batch`; labels are read locally and joined to API results by `application_id`. The interface uses the same local files and comparison logic for its queue and summary.
+It requires `data/synthetic/test_batch_100.json`, `data/synthetic/test_batch_100_labels.json`, and a healthy API with the model loaded. The application file uses the API/model's seven supported feature fields plus `application_id`, which is tracking-only and echoed in results. The command submits only model-supported application fields and the tracking ID to `/api/v1/score/batch`; labels are read locally and joined to results by `application_id`. Labels are never sent to the API or model. The interface uses the same local files and comparison logic for its queue and summary.
 
 The report counts true positives (intentionally unusual and flagged), false negatives (intentionally unusual and not flagged), false positives (typical and flagged), and true negatives (typical and not flagged). Precision is `TP/(TP+FP)`, recall is `TP/(TP+FN)`, and false-positive rate is `FP/(FP+TN)`. A zero denominator is shown as `N/A`.
 

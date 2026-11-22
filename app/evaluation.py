@@ -1,5 +1,7 @@
 """ID-based evaluation of synthetic labels against API review recommendations."""
 
+import math
+
 LABELS = {"typical_synthetic", "unusual_synthetic"}
 
 
@@ -48,11 +50,17 @@ def evaluate_labeled_results(applications, results, label_sidecar):
         label = labels_by_id[app_id].get("demo_label")
         if label not in LABELS:
             raise ValueError(f"Unsupported or missing synthetic label for application_id {app_id!r}")
-        if result.get("status") != "success":
+        if result.get("status", "success") != "success":
             raise ValueError(f"API scoring failed for application_id {app_id!r}: {result.get('error_message') or 'unknown error'}")
         review = result.get("review_recommended")
         if not isinstance(review, bool):
             raise ValueError(f"API result for application_id {app_id!r} has no boolean review_recommended")
+        score = result.get("anomaly_score")
+        threshold = result.get("calibrated_threshold", result.get("threshold"))
+        if not isinstance(score, (int, float)) or not math.isfinite(score):
+            raise ValueError(f"API result for application_id {app_id!r} has no finite anomaly_score")
+        if not isinstance(threshold, (int, float)) or not math.isfinite(threshold):
+            raise ValueError(f"API result for application_id {app_id!r} has no finite threshold")
 
         unusual = label == "unusual_synthetic"
         if unusual and review:
@@ -70,8 +78,8 @@ def evaluate_labeled_results(applications, results, label_sidecar):
         rows.append({
             "application_id": app_id,
             "demo_label": label,
-            "anomaly_score": result.get("anomaly_score"),
-            "calibrated_threshold": result.get("calibrated_threshold"),
+            "anomaly_score": score,
+            "calibrated_threshold": threshold,
             "review_recommended": review,
             "outcome": outcome,
         })
