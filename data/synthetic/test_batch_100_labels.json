@@ -1,0 +1,505 @@
+{
+  "seed": 20261122,
+  "labels": [
+    {
+      "application_id": "SYNTH-APP-001",
+      "demo_label": "typical_synthetic",
+      "scenario": "baseline-like generated example"
+    },
+    {
+      "application_id": "SYNTH-APP-002",
+      "demo_label": "typical_synthetic",
+      "scenario": "baseline-like generated example"
+    },
+    {
+      "application_id": "SYNTH-APP-003",
+      "demo_label": "typical_synthetic",
+      "scenario": "baseline-like generated example"
+    },
+    {
+      "application_id": "SYNTH-APP-004",
+      "demo_label": "typical_synthetic",
+      "scenario": "baseline-like generated example"
+    },
+    {
+      "application_id": "SYNTH-APP-005",
+      "demo_label": "typical_synthetic",
+      "scenario": "baseline-like generated example"
+    },
+    {
+      "application_id": "SYNTH-APP-006",
+      "demo_label": "typical_synthetic",
+      "scenario": "baseline-like generated example"
+    },
+    {
+      "application_id": "SYNTH-APP-007",
+      "demo_label": "typical_synthetic",
+      "scenario": "baseline-like generated example"
+    },
+    {
+      "application_id": "SYNTH-APP-008",
+      "demo_label": "typical_synthetic",
+      "scenario": "baseline-like generated example"
+    },
+    {
+      "application_id": "SYNTH-APP-009",
+      "demo_label": "typical_synthetic",
+      "scenario": "baseline-like generated example"
+    },
+    {
+      "application_id": "SYNTH-APP-010",
+      "demo_label": "typical_synthetic",
+      "scenario": "baseline-like generated example"
+    },
+    {
+      "application_id": "SYNTH-APP-011",
+      "demo_label": "typical_synthetic",
+      "scenario": "baseline-like generated example"
+    },
+    {
+      "application_id": "SYNTH-APP-012",
+      "demo_label": "typical_synthetic",
+      "scenario": "baseline-like generated example"
+    },
+    {
+      "application_id": "SYNTH-APP-013",
+      "demo_label": "typical_synthetic",
+      "scenario": "baseline-like generated example"
+    },
+    {
+      "application_id": "SYNTH-APP-014",
+      "demo_label": "typical_synthetic",
+      "scenario": "baseline-like generated example"
+    },
+    {
+      "application_id": "SYNTH-APP-015",
+      "demo_label": "typical_synthetic",
+      "scenario": "baseline-like generated example"
+    },
+    {
+      "application_id": "SYNTH-APP-016",
+      "demo_label": "typical_synthetic",
+      "scenario": "baseline-like generated example"
+    },
+    {
+      "application_id": "SYNTH-APP-017",
+      "demo_label": "typical_synthetic",
+      "scenario": "baseline-like generated example"
+    },
+    {
+      "application_id": "SYNTH-APP-018",
+      "demo_label": "typical_synthetic",
+      "scenario": "baseline-like generated example"
+    },
+    {
+      "application_id": "SYNTH-APP-019",
+      "demo_label": "typical_synthetic",
+      "scenario": "baseline-like generated example"
+    },
+    {
+      "application_id": "SYNTH-APP-020",
+      "demo_label": "typical_synthetic",
+      "scenario": "baseline-like generated example"
+    },
+    {
+      "application_id": "SYNTH-APP-021",
+      "demo_label": "typical_synthetic",
+      "scenario": "baseline-like generated example"
+    },
+    {
+      "application_id": "SYNTH-APP-022",
+      "demo_label": "typical_synthetic",
+      "scenario": "baseline-like generated example"
+    },
+    {
+      "application_id": "SYNTH-APP-023",
+      "demo_label": "typical_synthetic",
+      "scenario": "baseline-like generated example"
+    },
+    {
+      "application_id": "SYNTH-APP-024",
+      "demo_label": "typical_synthetic",
+      "scenario": "baseline-like generated example"
+    },
+    {
+      "application_id": "SYNTH-APP-025",
+      "demo_label": "typical_synthetic",
+      "scenario": "baseline-like generated example"
+    },
+    {
+      "application_id": "SYNTH-APP-026",
+      "demo_label": "typical_synthetic",
+      "scenario": "baseline-like generated example"
+    },
+    {
+      "application_id": "SYNTH-APP-027",
+      "demo_label": "typical_synthetic",
+      "scenario": "baseline-like generated example"
+    },
+    {
+      "application_id": "SYNTH-APP-028",
+      "demo_label": "typical_synthetic",
+      "scenario": "baseline-like generated example"
+    },
+    {
+      "application_id": "SYNTH-APP-029",
+      "demo_label": "typical_synthetic",
+      "scenario": "baseline-like generated example"
+    },
+    {
+      "application_id": "SYNTH-APP-030",
+      "demo_label": "typical_synthetic",
+      "scenario": "baseline-like generated example"
+    },
+    {
+      "application_id": "SYNTH-APP-031",
+      "demo_label": "typical_synthetic",
+      "scenario": "baseline-like generated example"
+    },
+    {
+      "application_id": "SYNTH-APP-032",
+      "demo_label": "typical_synthetic",
+      "scenario": "baseline-like generated example"
+    },
+    {
+      "application_id": "SYNTH-APP-033",
+      "demo_label": "typical_synthetic",
+      "scenario": "baseline-like generated example"
+    },
+    {
+      "application_id": "SYNTH-APP-034",
+      "demo_label": "typical_synthetic",
+      "scenario": "baseline-like generated example"
+    },
+    {
+      "application_id": "SYNTH-APP-035",
+      "demo_label": "typical_synthetic",
+      "scenario": "baseline-like generated example"
+    },
+    {
+      "application_id": "SYNTH-APP-036",
+      "demo_label": "typical_synthetic",
+      "scenario": "baseline-like generated example"
+    },
+    {
+      "application_id": "SYNTH-APP-037",
+      "demo_label": "typical_synthetic",
+      "scenario": "baseline-like generated example"
+    },
+    {
+      "application_id": "SYNTH-APP-038",
+      "demo_label": "typical_synthetic",
+      "scenario": "baseline-like generated example"
+    },
+    {
+      "application_id": "SYNTH-APP-039",
+      "demo_label": "typical_synthetic",
+      "scenario": "baseline-like generated example"
+    },
+    {
+      "application_id": "SYNTH-APP-040",
+      "demo_label": "typical_synthetic",
+      "scenario": "baseline-like generated example"
+    },
+    {
+      "application_id": "SYNTH-APP-041",
+      "demo_label": "typical_synthetic",
+      "scenario": "baseline-like generated example"
+    },
+    {
+      "application_id": "SYNTH-APP-042",
+      "demo_label": "typical_synthetic",
+      "scenario": "baseline-like generated example"
+    },
+    {
+      "application_id": "SYNTH-APP-043",
+      "demo_label": "typical_synthetic",
+      "scenario": "baseline-like generated example"
+    },
+    {
+      "application_id": "SYNTH-APP-044",
+      "demo_label": "typical_synthetic",
+      "scenario": "baseline-like generated example"
+    },
+    {
+      "application_id": "SYNTH-APP-045",
+      "demo_label": "typical_synthetic",
+      "scenario": "baseline-like generated example"
+    },
+    {
+      "application_id": "SYNTH-APP-046",
+      "demo_label": "typical_synthetic",
+      "scenario": "baseline-like generated example"
+    },
+    {
+      "application_id": "SYNTH-APP-047",
+      "demo_label": "typical_synthetic",
+      "scenario": "baseline-like generated example"
+    },
+    {
+      "application_id": "SYNTH-APP-048",
+      "demo_label": "typical_synthetic",
+      "scenario": "baseline-like generated example"
+    },
+    {
+      "application_id": "SYNTH-APP-049",
+      "demo_label": "typical_synthetic",
+      "scenario": "baseline-like generated example"
+    },
+    {
+      "application_id": "SYNTH-APP-050",
+      "demo_label": "typical_synthetic",
+      "scenario": "baseline-like generated example"
+    },
+    {
+      "application_id": "SYNTH-APP-051",
+      "demo_label": "typical_synthetic",
+      "scenario": "baseline-like generated example"
+    },
+    {
+      "application_id": "SYNTH-APP-052",
+      "demo_label": "typical_synthetic",
+      "scenario": "baseline-like generated example"
+    },
+    {
+      "application_id": "SYNTH-APP-053",
+      "demo_label": "typical_synthetic",
+      "scenario": "baseline-like generated example"
+    },
+    {
+      "application_id": "SYNTH-APP-054",
+      "demo_label": "typical_synthetic",
+      "scenario": "baseline-like generated example"
+    },
+    {
+      "application_id": "SYNTH-APP-055",
+      "demo_label": "typical_synthetic",
+      "scenario": "baseline-like generated example"
+    },
+    {
+      "application_id": "SYNTH-APP-056",
+      "demo_label": "typical_synthetic",
+      "scenario": "baseline-like generated example"
+    },
+    {
+      "application_id": "SYNTH-APP-057",
+      "demo_label": "typical_synthetic",
+      "scenario": "baseline-like generated example"
+    },
+    {
+      "application_id": "SYNTH-APP-058",
+      "demo_label": "typical_synthetic",
+      "scenario": "baseline-like generated example"
+    },
+    {
+      "application_id": "SYNTH-APP-059",
+      "demo_label": "typical_synthetic",
+      "scenario": "baseline-like generated example"
+    },
+    {
+      "application_id": "SYNTH-APP-060",
+      "demo_label": "typical_synthetic",
+      "scenario": "baseline-like generated example"
+    },
+    {
+      "application_id": "SYNTH-APP-061",
+      "demo_label": "typical_synthetic",
+      "scenario": "baseline-like generated example"
+    },
+    {
+      "application_id": "SYNTH-APP-062",
+      "demo_label": "typical_synthetic",
+      "scenario": "baseline-like generated example"
+    },
+    {
+      "application_id": "SYNTH-APP-063",
+      "demo_label": "typical_synthetic",
+      "scenario": "baseline-like generated example"
+    },
+    {
+      "application_id": "SYNTH-APP-064",
+      "demo_label": "typical_synthetic",
+      "scenario": "baseline-like generated example"
+    },
+    {
+      "application_id": "SYNTH-APP-065",
+      "demo_label": "typical_synthetic",
+      "scenario": "baseline-like generated example"
+    },
+    {
+      "application_id": "SYNTH-APP-066",
+      "demo_label": "typical_synthetic",
+      "scenario": "baseline-like generated example"
+    },
+    {
+      "application_id": "SYNTH-APP-067",
+      "demo_label": "typical_synthetic",
+      "scenario": "baseline-like generated example"
+    },
+    {
+      "application_id": "SYNTH-APP-068",
+      "demo_label": "typical_synthetic",
+      "scenario": "baseline-like generated example"
+    },
+    {
+      "application_id": "SYNTH-APP-069",
+      "demo_label": "typical_synthetic",
+      "scenario": "baseline-like generated example"
+    },
+    {
+      "application_id": "SYNTH-APP-070",
+      "demo_label": "typical_synthetic",
+      "scenario": "baseline-like generated example"
+    },
+    {
+      "application_id": "SYNTH-APP-071",
+      "demo_label": "unusual_synthetic",
+      "scenario": "coverage_income_gap"
+    },
+    {
+      "application_id": "SYNTH-APP-072",
+      "demo_label": "unusual_synthetic",
+      "scenario": "application_velocity"
+    },
+    {
+      "application_id": "SYNTH-APP-073",
+      "demo_label": "unusual_synthetic",
+      "scenario": "channel_scale_mismatch"
+    },
+    {
+      "application_id": "SYNTH-APP-074",
+      "demo_label": "unusual_synthetic",
+      "scenario": "deductible_property_age"
+    },
+    {
+      "application_id": "SYNTH-APP-075",
+      "demo_label": "unusual_synthetic",
+      "scenario": "coverage_income_gap"
+    },
+    {
+      "application_id": "SYNTH-APP-076",
+      "demo_label": "unusual_synthetic",
+      "scenario": "application_velocity"
+    },
+    {
+      "application_id": "SYNTH-APP-077",
+      "demo_label": "unusual_synthetic",
+      "scenario": "channel_scale_mismatch"
+    },
+    {
+      "application_id": "SYNTH-APP-078",
+      "demo_label": "unusual_synthetic",
+      "scenario": "deductible_property_age"
+    },
+    {
+      "application_id": "SYNTH-APP-079",
+      "demo_label": "unusual_synthetic",
+      "scenario": "coverage_income_gap"
+    },
+    {
+      "application_id": "SYNTH-APP-080",
+      "demo_label": "unusual_synthetic",
+      "scenario": "application_velocity"
+    },
+    {
+      "application_id": "SYNTH-APP-081",
+      "demo_label": "unusual_synthetic",
+      "scenario": "channel_scale_mismatch"
+    },
+    {
+      "application_id": "SYNTH-APP-082",
+      "demo_label": "unusual_synthetic",
+      "scenario": "deductible_property_age"
+    },
+    {
+      "application_id": "SYNTH-APP-083",
+      "demo_label": "unusual_synthetic",
+      "scenario": "coverage_income_gap"
+    },
+    {
+      "application_id": "SYNTH-APP-084",
+      "demo_label": "unusual_synthetic",
+      "scenario": "application_velocity"
+    },
+    {
+      "application_id": "SYNTH-APP-085",
+      "demo_label": "unusual_synthetic",
+      "scenario": "channel_scale_mismatch"
+    },
+    {
+      "application_id": "SYNTH-APP-086",
+      "demo_label": "unusual_synthetic",
+      "scenario": "deductible_property_age"
+    },
+    {
+      "application_id": "SYNTH-APP-087",
+      "demo_label": "unusual_synthetic",
+      "scenario": "coverage_income_gap"
+    },
+    {
+      "application_id": "SYNTH-APP-088",
+      "demo_label": "unusual_synthetic",
+      "scenario": "application_velocity"
+    },
+    {
+      "application_id": "SYNTH-APP-089",
+      "demo_label": "unusual_synthetic",
+      "scenario": "channel_scale_mismatch"
+    },
+    {
+      "application_id": "SYNTH-APP-090",
+      "demo_label": "unusual_synthetic",
+      "scenario": "deductible_property_age"
+    },
+    {
+      "application_id": "SYNTH-APP-091",
+      "demo_label": "unusual_synthetic",
+      "scenario": "coverage_income_gap"
+    },
+    {
+      "application_id": "SYNTH-APP-092",
+      "demo_label": "unusual_synthetic",
+      "scenario": "application_velocity"
+    },
+    {
+      "application_id": "SYNTH-APP-093",
+      "demo_label": "unusual_synthetic",
+      "scenario": "channel_scale_mismatch"
+    },
+    {
+      "application_id": "SYNTH-APP-094",
+      "demo_label": "unusual_synthetic",
+      "scenario": "deductible_property_age"
+    },
+    {
+      "application_id": "SYNTH-APP-095",
+      "demo_label": "unusual_synthetic",
+      "scenario": "coverage_income_gap"
+    },
+    {
+      "application_id": "SYNTH-APP-096",
+      "demo_label": "unusual_synthetic",
+      "scenario": "application_velocity"
+    },
+    {
+      "application_id": "SYNTH-APP-097",
+      "demo_label": "unusual_synthetic",
+      "scenario": "channel_scale_mismatch"
+    },
+    {
+      "application_id": "SYNTH-APP-098",
+      "demo_label": "unusual_synthetic",
+      "scenario": "deductible_property_age"
+    },
+    {
+      "application_id": "SYNTH-APP-099",
+      "demo_label": "unusual_synthetic",
+      "scenario": "coverage_income_gap"
+    },
+    {
+      "application_id": "SYNTH-APP-100",
+      "demo_label": "unusual_synthetic",
+      "scenario": "application_velocity"
+    }
+  ]
+}

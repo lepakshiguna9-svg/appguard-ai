@@ -1,0 +1,69 @@
+{
+  "model_version": "1.0.0-demo",
+  "artifact": "appguard-demo-v1.pt",
+  "feature_schema": [
+    "policy_type",
+    "requested_coverage",
+    "deductible",
+    "payment_frequency",
+    "channel",
+    "submission_velocity_24h",
+    "recent_change_count"
+  ],
+  "preprocessor": {
+    "categories": {
+      "policy_type": [
+        "__missing__",
+        "__unknown__",
+        "auto",
+        "home",
+        "renters"
+      ],
+      "payment_frequency": [
+        "__missing__",
+        "__unknown__",
+        "annual",
+        "monthly",
+        "quarterly"
+      ],
+      "channel": [
+        "__missing__",
+        "__unknown__",
+        "agent",
+        "phone",
+        "web"
+      ]
+    },
+    "means": {
+      "requested_coverage": 117682.5,
+      "deductible": 1496.6666666666667,
+      "submission_velocity_24h": 0.4361111111111111,
+      "recent_change_count": 0.5183333333333333
+    },
+    "stds": {
+      "requested_coverage": 158635.91315887458,
+      "deductible": 701.1815425091819,
+      "submission_velocity_24h": 0.7840963580870862,
+      "recent_change_count": 0.8929958939808551
+    }
+  },
+  "input_dim": 19,
+  "hidden_sizes": [
+    48,
+    24
+  ],
+  "latent_size": 8,
+  "training": {
+    "rows": 1800,
+    "epochs": 45,
+    "batch_size": 64,
+    "learning_rate": 0.001,
+    "seed": 23
+  },
+  "calibration": {
+    "method": "99th percentile (higher order statistic) of baseline calibration reconstruction MSE",
+    "sample_size": 500,
+    "threshold": 0.06842832267284393,
+    "score": "mean squared error across one-hot and standardized numeric dimensions"
+  }
+}
