@@ -338,7 +338,7 @@ function App() {
       <div><span>QUEUE SIZE</span><b>{rows.length}</b><small>{evaluation ? 'Labeled synthetic batch' : 'Synthetic records'}</small></div>
       <div><span>REVIEW SUGGESTED</span><b>{reviewCount}</b><small>Model recommendation</small></div>
       <div><span>WITHIN RANGE</span><b>{standardCount}</b><small>Below or at threshold</small></div>
-      <div><span>CALIBRATED THRESHOLD</span><b>{typeof modelInfo.calibration?.threshold === 'number' ? modelInfo.calibration.threshold.toPrecision(12) : '—'}</b><small>{modelInfo.calibration?.method || 'Calibration metadata'}</small></div>
+      <div><span>CALIBRATED THRESHOLD</span><b>{typeof modelInfo.calibration?.threshold === 'number' ? modelInfo.calibration.threshold.toPrecision(12) : '—'}</b><small>99th percentile · synthetic baseline</small></div>
     </section>
 
     {evaluation && <section className="evaluation-strip" aria-label="Synthetic evaluation summary">
