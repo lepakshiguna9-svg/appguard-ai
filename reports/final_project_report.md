@@ -6,11 +6,11 @@ AppGuard AI is a local educational prototype for unsupervised statistical anomal
 
 ## End-to-end design
 
-The generator writes separate training, calibration, and unusual demonstration CSVs. Training fits the preprocessing schema on baseline training rows, optimizes the VAE, scores calibration rows, and saves a versioned CPU model state plus JSON metadata. API startup safely loads this artifact; request validation bounds field values and batch size. The UI uses a Vite `/api` proxy and no hard-coded record scores. Synthetic IDs and labels are display-only and excluded from the model inputs.
+The committed VAE pipeline is preserved: version `1.0.0-demo`, seven model features, original fitted preprocessor and weights, and threshold `0.06842832267284393`. API startup validates the bundle. Six optional abstract values are accepted separately for explicit synthetic flag rules; the scoring function selects only the seven original features. The UI uses a Vite `/api` proxy and no hard-coded record scores. Synthetic IDs and labels are separated; labels are joined by ID only for local evaluation and are never sent to scoring or flag generation.
 
 ## Evaluation
 
-The project verification checks determinism in generated data, model/artifact load, API health and metadata, demo retrieval, finite batch scores, threshold-based review flag consistency, invalid input handling, bounded batches, and frontend production compilation. These checks establish software behavior only. No real-world model performance or fairness claim is made.
+The project verification checks deterministic data generation, exact model-bundle compatibility, API health and metadata, demo retrieval, score invariance to optional flag evidence, invalid input handling, bounded batches, ID-based evaluation, zero-denominator metrics, frontend tests, and production compilation. The restored original labeled batch yields 30 TP, 0 FN, 10 FP, 60 TN (accuracy 90.0%, precision 75.0%, recall 100%, F1 85.7%, false-positive rate 14.3%, ROC-AUC 1.000). These values describe only the constructed synthetic cases and are not real-world performance claims.
 
 ## Limitations and recommendations
 

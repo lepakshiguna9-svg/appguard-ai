@@ -6,10 +6,12 @@ test('shows unbounded scores as a direct threshold multiple without capping', ()
   const typical = scorePresentation(0.03, 0.15);
   assert.equal(typical.comparison, '0.2× the review threshold');
   assert.equal(typical.reviewRecommended, false);
-  const extreme = scorePresentation(482142.3125, 0.0684283);
-  assert.equal(extreme.scoreText, '482,142.3125');
+  const rawExtremeScore = 482142.3125;
+  const extreme = scorePresentation(rawExtremeScore, 0.0684283);
+  assert.equal(extreme.scoreText, '482,142.31');
   assert.equal(extreme.comparison, '7,045,950× the review threshold');
   assert.equal(extreme.reviewRecommended, true);
+  assert.equal(rawExtremeScore, 482142.3125);
 });
 
 test('uses the API strict-greater-than rule at and around the threshold', () => {

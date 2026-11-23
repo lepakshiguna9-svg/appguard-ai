@@ -9,7 +9,20 @@ const CURRENT_REQUIRED = [
 ];
 const CURRENT_FIELDS = [
   'application_id', ...CURRENT_REQUIRED,
+  'duplicate_identity_reference_count', 'identity_document_consistency',
+  'application_detail_consistency', 'contact_reference_consistency',
+  'beneficiary_reference_consistency', 'repeat_submission_count',
 ];
+// Optional, separately validated values for synthetic flag rules. The VAE
+// transform uses only CURRENT_REQUIRED's seven fields.
+const FLAG_EVIDENCE_DEFAULTS = {
+  duplicate_identity_reference_count: 0,
+  identity_document_consistency: 0.98,
+  application_detail_consistency: 0.98,
+  contact_reference_consistency: 0.98,
+  beneficiary_reference_consistency: 0.98,
+  repeat_submission_count: 0,
+};
 
 function isObject(value) {
   return value !== null && typeof value === 'object' && !Array.isArray(value);
@@ -43,8 +56,11 @@ export function normalizeDemoPayload(payload) {
           throw new Error(`Demo sample ${id} is missing required field "${field}".`);
         }
       }
-      const application = { application_id: id };
+      const application = { application_id: id, ...FLAG_EVIDENCE_DEFAULTS };
       for (const field of CURRENT_REQUIRED) {
+        if (field in value) application[field] = value[field];
+      }
+      for (const field of Object.keys(FLAG_EVIDENCE_DEFAULTS)) {
         if (field in value) application[field] = value[field];
       }
       return {
@@ -64,7 +80,10 @@ export function normalizeDemoPayload(payload) {
     if (missing.length) {
       throw new Error(`Demo record ${id} is missing required field${missing.length > 1 ? 's' : ''}: ${missing.join(', ')}.`);
     }
-    const application = Object.fromEntries(CURRENT_REQUIRED.map((field) => [field, value[field]]));
+    const application = { ...FLAG_EVIDENCE_DEFAULTS, ...Object.fromEntries(CURRENT_REQUIRED.map((field) => [field, value[field]])) };
+    for (const field of Object.keys(FLAG_EVIDENCE_DEFAULTS)) {
+      if (field in value) application[field] = value[field];
+    }
     return {
       id,
       application,
@@ -92,7 +111,7 @@ export function normalizeApplicationsPayload(payload) {
         throw new Error(`Synthetic application ${id} is missing required field "${field}".`);
       }
     }
-    const application = Object.fromEntries(CURRENT_FIELDS.filter((field) => field in value).map((field) => [field, value[field]]));
+    const application = { ...FLAG_EVIDENCE_DEFAULTS, ...Object.fromEntries(CURRENT_FIELDS.filter((field) => field in value).map((field) => [field, value[field]])) };
     return {
       id,
       application,
@@ -147,16 +166,23 @@ export function normalizeUploadPayload(payload, idPrefix = 'UPLOAD') {
       : `${idPrefix}-${Date.now()}-${index + 1}`;
     if (seen.has(id)) throw new Error(`Batch contains duplicate application_id "${id}".`);
     seen.add(id);
+    const application = { ...FLAG_EVIDENCE_DEFAULTS, ...Object.fromEntries(CURRENT_FIELDS.filter((field) => field in value).map((field) => [field, field === 'application_id' ? id : value[field]])), application_id: id };
+    const clientOnly = new Set(['applicant_age', 'annual_income_estimate', 'demo_label', 'scenario', 'scenario_description', 'description']);
+    const dataQualityIssues = [];
     for (const field of CURRENT_REQUIRED) {
       if (!(field in value) || value[field] === null || value[field] === '') {
-        throw new Error(`Application ${id} is missing required field "${field}".`);
+        dataQualityIssues.push({ field, actual: value[field] ?? 'missing', reference: 'required API field', explanation: `The required scoring field "${field}" is missing or empty; this row was withheld from scoring.` });
       }
     }
-    const application = Object.fromEntries(CURRENT_FIELDS.map((field) => [field, field === 'application_id' ? id : value[field]]));
+    for (const field of Object.keys(value)) {
+      if (!CURRENT_FIELDS.includes(field) && !clientOnly.has(field)) {
+        dataQualityIssues.push({ field, actual: 'unrecognized field', reference: 'documented scoring API schema', explanation: `The field "${field}" is not part of the scoring schema and was omitted.` });
+      }
+    }
     const display = Object.fromEntries(DISPLAY_FIELDS
       .filter((field) => typeof value[field] === 'number' && Number.isFinite(value[field]))
       .map((field) => [field, value[field]]));
-    return { id, application, fields: Object.entries(application).filter(([key]) => key !== 'application_id'), display };
+    return { id, application, fields: Object.entries(application).filter(([key]) => key !== 'application_id'), display, dataQualityIssues };
   });
 }
 
@@ -175,6 +201,32 @@ function normalizeDeviation(value, id) {
     throw new Error(`Scoring response for ${id} contains a feature deviation without a feature name and finite residual.`);
   }
   return { feature, residual };
+}
+
+function normalizeFeatureDeviations(value, id) {
+  if (value === undefined) return undefined;
+  if (!isObject(value)) throw new Error(`Scoring response for ${id} has a malformed feature_deviations object.`);
+  return Object.entries(value).map(([feature, residual]) => {
+    if (!feature || typeof residual !== 'number' || !Number.isFinite(residual) || residual < 0) {
+      throw new Error(`Scoring response for ${id} contains an invalid feature reconstruction error.`);
+    }
+    return { feature, residual };
+  }).sort((left, right) => right.residual - left.residual);
+}
+
+function normalizeFlags(value, id) {
+  if (value === undefined) return undefined;
+  if (!Array.isArray(value)) throw new Error(`Scoring response for ${id} has a malformed flags field.`);
+  return value.map((flag) => {
+    if (!isObject(flag) || typeof flag.code !== 'string' || typeof flag.category !== 'string'
+      || typeof flag.name !== 'string' || typeof flag.severity !== 'string'
+      || !['info', 'review', 'warning', 'high'].includes(flag.severity)
+      || typeof flag.reference !== 'string' || typeof flag.explanation !== 'string'
+      || !(typeof flag.triggering_value === 'string' || (typeof flag.triggering_value === 'number' && Number.isFinite(flag.triggering_value)))) {
+      throw new Error(`Scoring response for ${id} contains a malformed application flag.`);
+    }
+    return { ...flag, triggeringValue: flag.triggering_value };
+  });
 }
 
 /** Validate and map current batch results (`calibrated_threshold`) or the older local contract (`threshold`). */
@@ -220,7 +272,8 @@ export function normalizeBatchPayload(payload, records) {
       throw new Error(`Scoring response for ${sample.id} has a malformed top_deviations field.`);
     }
     const deviations = rawDeviations.map((deviation) => normalizeDeviation(deviation, sample.id));
-    return { ...sample, score, threshold, review: value.review_recommended, deviations };
+    const featureDeviations = normalizeFeatureDeviations(value.feature_deviations, sample.id);
+    return { ...sample, score, threshold, review: value.review_recommended, deviations, featureDeviations, flags: normalizeFlags(value.flags, sample.id) };
   });
 }
 

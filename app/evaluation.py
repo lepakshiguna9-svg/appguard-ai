@@ -87,10 +87,27 @@ def evaluate_labeled_results(applications, results, label_sidecar):
     def ratio(numerator, denominator):
         return None if denominator == 0 else numerator / denominator
 
+    positives = [r["anomaly_score"] for r in rows if r["demo_label"] == "unusual_synthetic"]
+    negatives = [r["anomaly_score"] for r in rows if r["demo_label"] == "typical_synthetic"]
+    # Mann–Whitney rank interpretation with half credit for tied scores.
+    auc = None
+    if positives and negatives:
+        wins = sum(1.0 if p > n else 0.5 if p == n else 0.0 for p in positives for n in negatives)
+        auc = wins / (len(positives) * len(negatives))
+    tp, fn, fp, tn = (counts[k] for k in ("true_positives", "false_negatives", "false_positives", "true_negatives"))
+    precision = ratio(tp, tp + fp)
+    recall = ratio(tp, tp + fn)
+
     return {
         "rows": rows,
         "counts": counts,
-        "precision": ratio(counts["true_positives"], counts["true_positives"] + counts["false_positives"]),
-        "recall": ratio(counts["true_positives"], counts["true_positives"] + counts["false_negatives"]),
+        "confusion_matrix": {"true_positive": tp, "false_negative": fn, "false_positive": fp, "true_negative": tn},
+        "typical_count": len(negatives),
+        "unusual_count": len(positives),
+        "accuracy": ratio(tp + tn, tp + fn + fp + tn),
+        "precision": precision,
+        "recall": recall,
+        "f1": ratio(2 * tp, 2 * tp + fp + fn),
         "false_positive_rate": ratio(counts["false_positives"], counts["false_positives"] + counts["true_negatives"]),
+        "roc_auc": auc,
     }

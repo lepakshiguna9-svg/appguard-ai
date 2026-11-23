@@ -45,9 +45,12 @@ def main():
     print(f"Intentionally unusual missed (FN): {counts['false_negatives']}")
     print(f"Typical flagged (FP): {counts['false_positives']}")
     print(f"Typical not flagged (TN): {counts['true_negatives']}")
+    print(f"Accuracy (TP+TN)/N: {display_rate(evaluation['accuracy'])}")
     print(f"Precision TP/(TP+FP): {display_rate(evaluation['precision'])}")
     print(f"Recall TP/(TP+FN): {display_rate(evaluation['recall'])}")
+    print(f"F1 2TP/(2TP+FP+FN): {display_rate(evaluation['f1'])}")
     print(f"False-positive rate FP/(FP+TN): {display_rate(evaluation['false_positive_rate'])}")
+    print(f"ROC-AUC (raw score ranking): {display_rate(evaluation['roc_auc'])}")
     print("Synthetic software demonstration only; these metrics do not establish real-world performance.")
 
 

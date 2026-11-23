@@ -7,7 +7,13 @@
     "payment_frequency": "quarterly",
     "channel": "web",
     "submission_velocity_24h": 0.0,
-    "recent_change_count": 1.0
+    "recent_change_count": 1.0,
+    "duplicate_identity_reference_count": 0.0,
+    "identity_document_consistency": 0.9675,
+    "application_detail_consistency": 0.9003,
+    "contact_reference_consistency": 0.9672,
+    "beneficiary_reference_consistency": 0.9692,
+    "repeat_submission_count": 0.0
   },
   {
     "application_id": "SYNTH-APP-002",
@@ -17,7 +23,13 @@
     "payment_frequency": "monthly",
     "channel": "web",
     "submission_velocity_24h": 1.0,
-    "recent_change_count": 0.0
+    "recent_change_count": 0.0,
+    "duplicate_identity_reference_count": 0.0,
+    "identity_document_consistency": 0.9942,
+    "application_detail_consistency": 0.976,
+    "contact_reference_consistency": 0.9425,
+    "beneficiary_reference_consistency": 0.9838,
+    "repeat_submission_count": 0.0
   },
   {
     "application_id": "SYNTH-APP-003",
@@ -27,7 +39,13 @@
     "payment_frequency": "annual",
     "channel": "agent",
     "submission_velocity_24h": 2.0,
-    "recent_change_count": 0.0
+    "recent_change_count": 0.0,
+    "duplicate_identity_reference_count": 0.0,
+    "identity_document_consistency": 0.9562,
+    "application_detail_consistency": 0.9058,
+    "contact_reference_consistency": 0.9142,
+    "beneficiary_reference_consistency": 0.9453,
+    "repeat_submission_count": 1.0
   },
   {
     "application_id": "SYNTH-APP-004",
@@ -37,7 +55,13 @@
     "payment_frequency": "quarterly",
     "channel": "web",
     "submission_velocity_24h": 1.0,
-    "recent_change_count": 1.0
+    "recent_change_count": 1.0,
+    "duplicate_identity_reference_count": 0.0,
+    "identity_document_consistency": 0.9976,
+    "application_detail_consistency": 0.959,
+    "contact_reference_consistency": 0.9073,
+    "beneficiary_reference_consistency": 0.9529,
+    "repeat_submission_count": 1.0
   },
   {
     "application_id": "SYNTH-APP-005",
@@ -47,7 +71,13 @@
     "payment_frequency": "quarterly",
     "channel": "agent",
     "submission_velocity_24h": 0.0,
-    "recent_change_count": 1.0
+    "recent_change_count": 1.0,
+    "duplicate_identity_reference_count": 0.0,
+    "identity_document_consistency": 0.9742,
+    "application_detail_consistency": 0.9228,
+    "contact_reference_consistency": 0.9259,
+    "beneficiary_reference_consistency": 0.9673,
+    "repeat_submission_count": 0.0
   },
   {
     "application_id": "SYNTH-APP-006",
@@ -57,7 +87,13 @@
     "payment_frequency": "quarterly",
     "channel": "web",
     "submission_velocity_24h": 3.0,
-    "recent_change_count": 0.0
+    "recent_change_count": 0.0,
+    "duplicate_identity_reference_count": 0.0,
+    "identity_document_consistency": 0.9335,
+    "application_detail_consistency": 0.9301,
+    "contact_reference_consistency": 0.9152,
+    "beneficiary_reference_consistency": 0.9027,
+    "repeat_submission_count": 0.0
   },
   {
     "application_id": "SYNTH-APP-007",
@@ -67,7 +103,13 @@
     "payment_frequency": "annual",
     "channel": "phone",
     "submission_velocity_24h": 1.0,
-    "recent_change_count": 1.0
+    "recent_change_count": 1.0,
+    "duplicate_identity_reference_count": 0.0,
+    "identity_document_consistency": 0.9479,
+    "application_detail_consistency": 0.9737,
+    "contact_reference_consistency": 0.9515,
+    "beneficiary_reference_consistency": 0.9428,
+    "repeat_submission_count": 0.0
   },
   {
     "application_id": "SYNTH-APP-008",
@@ -77,7 +119,13 @@
     "payment_frequency": "quarterly",
     "channel": "web",
     "submission_velocity_24h": 2.0,
-    "recent_change_count": 1.0
+    "recent_change_count": 1.0,
+    "duplicate_identity_reference_count": 0.0,
+    "identity_document_consistency": 0.918,
+    "application_detail_consistency": 0.92,
+    "contact_reference_consistency": 0.9844,
+    "beneficiary_reference_consistency": 0.9641,
+    "repeat_submission_count": 8.0
   },
   {
     "application_id": "SYNTH-APP-009",
@@ -87,7 +135,13 @@
     "payment_frequency": "monthly",
     "channel": "agent",
     "submission_velocity_24h": 1.0,
-    "recent_change_count": 0.0
+    "recent_change_count": 0.0,
+    "duplicate_identity_reference_count": 0.0,
+    "identity_document_consistency": 0.9895,
+    "application_detail_consistency": 0.9934,
+    "contact_reference_consistency": 0.9389,
+    "beneficiary_reference_consistency": 0.9109,
+    "repeat_submission_count": 0.0
   },
   {
     "application_id": "SYNTH-APP-010",
@@ -97,7 +151,13 @@
     "payment_frequency": "monthly",
     "channel": "phone",
     "submission_velocity_24h": 3.0,
-    "recent_change_count": 0.0
+    "recent_change_count": 0.0,
+    "duplicate_identity_reference_count": 0.0,
+    "identity_document_consistency": 0.9981,
+    "application_detail_consistency": 0.9097,
+    "contact_reference_consistency": 0.9871,
+    "beneficiary_reference_consistency": 0.9215,
+    "repeat_submission_count": 0.0
   },
   {
     "application_id": "SYNTH-APP-011",
@@ -107,7 +167,13 @@
     "payment_frequency": "annual",
     "channel": "web",
     "submission_velocity_24h": 0.0,
-    "recent_change_count": 4.0
+    "recent_change_count": 4.0,
+    "duplicate_identity_reference_count": 0.0,
+    "identity_document_consistency": 0.9999,
+    "application_detail_consistency": 0.9468,
+    "contact_reference_consistency": 0.9684,
+    "beneficiary_reference_consistency": 0.9035,
+    "repeat_submission_count": 1.0
   },
   {
     "application_id": "SYNTH-APP-012",
@@ -117,7 +183,13 @@
     "payment_frequency": "monthly",
     "channel": "web",
     "submission_velocity_24h": 4.0,
-    "recent_change_count": 0.0
+    "recent_change_count": 0.0,
+    "duplicate_identity_reference_count": 0.0,
+    "identity_document_consistency": 0.95,
+    "application_detail_consistency": 0.9326,
+    "contact_reference_consistency": 0.9089,
+    "beneficiary_reference_consistency": 0.9089,
+    "repeat_submission_count": 1.0
   },
   {
     "application_id": "SYNTH-APP-013",
@@ -127,7 +199,13 @@
     "payment_frequency": "monthly",
     "channel": "web",
     "submission_velocity_24h": 1.0,
-    "recent_change_count": 3.0
+    "recent_change_count": 3.0,
+    "duplicate_identity_reference_count": 0.0,
+    "identity_document_consistency": 0.24,
+    "application_detail_consistency": 0.36,
+    "contact_reference_consistency": 0.9956,
+    "beneficiary_reference_consistency": 0.9204,
+    "repeat_submission_count": 0.0
   },
   {
     "application_id": "SYNTH-APP-014",
@@ -137,7 +215,13 @@
     "payment_frequency": "annual",
     "channel": "agent",
     "submission_velocity_24h": 1.0,
-    "recent_change_count": 2.0
+    "recent_change_count": 2.0,
+    "duplicate_identity_reference_count": 0.0,
+    "identity_document_consistency": 0.9466,
+    "application_detail_consistency": 0.9677,
+    "contact_reference_consistency": 0.939,
+    "beneficiary_reference_consistency": 0.9806,
+    "repeat_submission_count": 0.0
   },
   {
     "application_id": "SYNTH-APP-015",
@@ -147,7 +231,13 @@
     "payment_frequency": "monthly",
     "channel": "web",
     "submission_velocity_24h": 0.0,
-    "recent_change_count": 4.0
+    "recent_change_count": 4.0,
+    "duplicate_identity_reference_count": 3.0,
+    "identity_document_consistency": 0.9934,
+    "application_detail_consistency": 0.9206,
+    "contact_reference_consistency": 0.9895,
+    "beneficiary_reference_consistency": 0.9281,
+    "repeat_submission_count": 0.0
   },
   {
     "application_id": "SYNTH-APP-016",
@@ -157,7 +247,13 @@
     "payment_frequency": "quarterly",
     "channel": "agent",
     "submission_velocity_24h": 0.0,
-    "recent_change_count": 4.0
+    "recent_change_count": 4.0,
+    "duplicate_identity_reference_count": 0.0,
+    "identity_document_consistency": 0.9338,
+    "application_detail_consistency": 0.9388,
+    "contact_reference_consistency": 0.9657,
+    "beneficiary_reference_consistency": 0.9743,
+    "repeat_submission_count": 0.0
   },
   {
     "application_id": "SYNTH-APP-017",
@@ -167,7 +263,13 @@
     "payment_frequency": "monthly",
     "channel": "agent",
     "submission_velocity_24h": 2.0,
-    "recent_change_count": 4.0
+    "recent_change_count": 4.0,
+    "duplicate_identity_reference_count": 0.0,
+    "identity_document_consistency": 0.9216,
+    "application_detail_consistency": 0.9553,
+    "contact_reference_consistency": 0.9144,
+    "beneficiary_reference_consistency": 0.9633,
+    "repeat_submission_count": 0.0
   },
   {
     "application_id": "SYNTH-APP-018",
@@ -177,7 +279,13 @@
     "payment_frequency": "quarterly",
     "channel": "web",
     "submission_velocity_24h": 3.0,
-    "recent_change_count": 2.0
+    "recent_change_count": 2.0,
+    "duplicate_identity_reference_count": 0.0,
+    "identity_document_consistency": 0.9357,
+    "application_detail_consistency": 0.9999,
+    "contact_reference_consistency": 0.9433,
+    "beneficiary_reference_consistency": 0.937,
+    "repeat_submission_count": 1.0
   },
   {
     "application_id": "SYNTH-APP-019",
@@ -187,7 +295,13 @@
     "payment_frequency": "monthly",
     "channel": "phone",
     "submission_velocity_24h": 3.0,
-    "recent_change_count": 0.0
+    "recent_change_count": 0.0,
+    "duplicate_identity_reference_count": 0.0,
+    "identity_document_consistency": 0.9885,
+    "application_detail_consistency": 0.9088,
+    "contact_reference_consistency": 0.9529,
+    "beneficiary_reference_consistency": 0.9274,
+    "repeat_submission_count": 1.0
   },
   {
     "application_id": "SYNTH-APP-020",
@@ -197,7 +311,13 @@
     "payment_frequency": "monthly",
     "channel": "agent",
     "submission_velocity_24h": 1.0,
-    "recent_change_count": 0.0
+    "recent_change_count": 0.0,
+    "duplicate_identity_reference_count": 0.0,
+    "identity_document_consistency": 0.24,
+    "application_detail_consistency": 0.36,
+    "contact_reference_consistency": 0.9136,
+    "beneficiary_reference_consistency": 0.9382,
+    "repeat_submission_count": 0.0
   },
   {
     "application_id": "SYNTH-APP-021",
@@ -207,7 +327,13 @@
     "payment_frequency": "monthly",
     "channel": "agent",
     "submission_velocity_24h": 1.0,
-    "recent_change_count": 2.0
+    "recent_change_count": 2.0,
+    "duplicate_identity_reference_count": 0.0,
+    "identity_document_consistency": 0.968,
+    "application_detail_consistency": 0.9534,
+    "contact_reference_consistency": 0.9505,
+    "beneficiary_reference_consistency": 0.927,
+    "repeat_submission_count": 2.0
   },
   {
     "application_id": "SYNTH-APP-022",
@@ -217,7 +343,13 @@
     "payment_frequency": "annual",
     "channel": "web",
     "submission_velocity_24h": 0.0,
-    "recent_change_count": 3.0
+    "recent_change_count": 3.0,
+    "duplicate_identity_reference_count": 0.0,
+    "identity_document_consistency": 0.953,
+    "application_detail_consistency": 0.9006,
+    "contact_reference_consistency": 0.9866,
+    "beneficiary_reference_consistency": 0.9135,
+    "repeat_submission_count": 1.0
   },
   {
     "application_id": "SYNTH-APP-023",
@@ -227,7 +359,13 @@
     "payment_frequency": "monthly",
     "channel": "agent",
     "submission_velocity_24h": 1.0,
-    "recent_change_count": 3.0
+    "recent_change_count": 3.0,
+    "duplicate_identity_reference_count": 0.0,
+    "identity_document_consistency": 0.9737,
+    "application_detail_consistency": 0.9353,
+    "contact_reference_consistency": 0.9529,
+    "beneficiary_reference_consistency": 0.9822,
+    "repeat_submission_count": 1.0
   },
   {
     "application_id": "SYNTH-APP-024",
@@ -237,7 +375,13 @@
     "payment_frequency": "monthly",
     "channel": "web",
     "submission_velocity_24h": 3.0,
-    "recent_change_count": 0.0
+    "recent_change_count": 0.0,
+    "duplicate_identity_reference_count": 0.0,
+    "identity_document_consistency": 0.92,
+    "application_detail_consistency": 0.9238,
+    "contact_reference_consistency": 0.9587,
+    "beneficiary_reference_consistency": 0.9819,
+    "repeat_submission_count": 1.0
   },
   {
     "application_id": "SYNTH-APP-025",
@@ -247,7 +391,13 @@
     "payment_frequency": "quarterly",
     "channel": "agent",
     "submission_velocity_24h": 2.0,
-    "recent_change_count": 2.0
+    "recent_change_count": 2.0,
+    "duplicate_identity_reference_count": 0.0,
+    "identity_document_consistency": 0.9747,
+    "application_detail_consistency": 0.9127,
+    "contact_reference_consistency": 0.987,
+    "beneficiary_reference_consistency": 0.9671,
+    "repeat_submission_count": 0.0
   },
   {
     "application_id": "SYNTH-APP-026",
@@ -257,7 +407,13 @@
     "payment_frequency": "quarterly",
     "channel": "agent",
     "submission_velocity_24h": 1.0,
-    "recent_change_count": 1.0
+    "recent_change_count": 1.0,
+    "duplicate_identity_reference_count": 0.0,
+    "identity_document_consistency": 0.9713,
+    "application_detail_consistency": 0.9741,
+    "contact_reference_consistency": 0.9076,
+    "beneficiary_reference_consistency": 0.9891,
+    "repeat_submission_count": 1.0
   },
   {
     "application_id": "SYNTH-APP-027",
@@ -267,7 +423,13 @@
     "payment_frequency": "monthly",
     "channel": "web",
     "submission_velocity_24h": 2.0,
-    "recent_change_count": 2.0
+    "recent_change_count": 2.0,
+    "duplicate_identity_reference_count": 0.0,
+    "identity_document_consistency": 0.9637,
+    "application_detail_consistency": 0.9917,
+    "contact_reference_consistency": 0.9041,
+    "beneficiary_reference_consistency": 0.9487,
+    "repeat_submission_count": 0.0
   },
   {
     "application_id": "SYNTH-APP-028",
@@ -277,7 +439,13 @@
     "payment_frequency": "monthly",
     "channel": "agent",
     "submission_velocity_24h": 0.0,
-    "recent_change_count": 1.0
+    "recent_change_count": 1.0,
+    "duplicate_identity_reference_count": 0.0,
+    "identity_document_consistency": 0.9234,
+    "application_detail_consistency": 0.9499,
+    "contact_reference_consistency": 0.9709,
+    "beneficiary_reference_consistency": 1.0,
+    "repeat_submission_count": 0.0
   },
   {
     "application_id": "SYNTH-APP-029",
@@ -287,7 +455,13 @@
     "payment_frequency": "monthly",
     "channel": "web",
     "submission_velocity_24h": 4.0,
-    "recent_change_count": 1.0
+    "recent_change_count": 1.0,
+    "duplicate_identity_reference_count": 0.0,
+    "identity_document_consistency": 0.9081,
+    "application_detail_consistency": 0.975,
+    "contact_reference_consistency": 0.9269,
+    "beneficiary_reference_consistency": 0.9377,
+    "repeat_submission_count": 0.0
   },
   {
     "application_id": "SYNTH-APP-030",
@@ -297,7 +471,13 @@
     "payment_frequency": "monthly",
     "channel": "agent",
     "submission_velocity_24h": 0.0,
-    "recent_change_count": 0.0
+    "recent_change_count": 0.0,
+    "duplicate_identity_reference_count": 0.0,
+    "identity_document_consistency": 0.24,
+    "application_detail_consistency": 0.36,
+    "contact_reference_consistency": 0.9678,
+    "beneficiary_reference_consistency": 0.9946,
+    "repeat_submission_count": 0.0
   },
   {
     "application_id": "SYNTH-APP-031",
@@ -307,7 +487,13 @@
     "payment_frequency": "monthly",
     "channel": "phone",
     "submission_velocity_24h": 0.0,
-    "recent_change_count": 3.0
+    "recent_change_count": 3.0,
+    "duplicate_identity_reference_count": 0.0,
+    "identity_document_consistency": 0.9039,
+    "application_detail_consistency": 0.9585,
+    "contact_reference_consistency": 0.984,
+    "beneficiary_reference_consistency": 0.18,
+    "repeat_submission_count": 1.0
   },
   {
     "application_id": "SYNTH-APP-032",
@@ -317,7 +503,13 @@
     "payment_frequency": "annual",
     "channel": "agent",
     "submission_velocity_24h": 0.0,
-    "recent_change_count": 2.0
+    "recent_change_count": 2.0,
+    "duplicate_identity_reference_count": 0.0,
+    "identity_document_consistency": 0.9485,
+    "application_detail_consistency": 0.9805,
+    "contact_reference_consistency": 0.9917,
+    "beneficiary_reference_consistency": 0.9502,
+    "repeat_submission_count": 2.0
   },
   {
     "application_id": "SYNTH-APP-033",
@@ -327,7 +519,13 @@
     "payment_frequency": "annual",
     "channel": "agent",
     "submission_velocity_24h": 1.0,
-    "recent_change_count": 0.0
+    "recent_change_count": 0.0,
+    "duplicate_identity_reference_count": 0.0,
+    "identity_document_consistency": 0.9594,
+    "application_detail_consistency": 0.9428,
+    "contact_reference_consistency": 0.9834,
+    "beneficiary_reference_consistency": 0.9211,
+    "repeat_submission_count": 0.0
   },
   {
     "application_id": "SYNTH-APP-034",
@@ -337,7 +535,13 @@
     "payment_frequency": "monthly",
     "channel": "agent",
     "submission_velocity_24h": 3.0,
-    "recent_change_count": 2.0
+    "recent_change_count": 2.0,
+    "duplicate_identity_reference_count": 0.0,
+    "identity_document_consistency": 0.9098,
+    "application_detail_consistency": 0.9597,
+    "contact_reference_consistency": 0.9162,
+    "beneficiary_reference_consistency": 0.9818,
+    "repeat_submission_count": 0.0
   },
   {
     "application_id": "SYNTH-APP-035",
@@ -347,7 +551,13 @@
     "payment_frequency": "annual",
     "channel": "agent",
     "submission_velocity_24h": 0.0,
-    "recent_change_count": 1.0
+    "recent_change_count": 1.0,
+    "duplicate_identity_reference_count": 0.0,
+    "identity_document_consistency": 0.9313,
+    "application_detail_consistency": 0.9054,
+    "contact_reference_consistency": 0.9465,
+    "beneficiary_reference_consistency": 0.9597,
+    "repeat_submission_count": 0.0
   },
   {
     "application_id": "SYNTH-APP-036",
@@ -357,7 +567,13 @@
     "payment_frequency": "annual",
     "channel": "web",
     "submission_velocity_24h": 1.0,
-    "recent_change_count": 1.0
+    "recent_change_count": 1.0,
+    "duplicate_identity_reference_count": 0.0,
+    "identity_document_consistency": 0.9323,
+    "application_detail_consistency": 0.9151,
+    "contact_reference_consistency": 0.9993,
+    "beneficiary_reference_consistency": 0.9847,
+    "repeat_submission_count": 0.0
   },
   {
     "application_id": "SYNTH-APP-037",
@@ -367,7 +583,13 @@
     "payment_frequency": "monthly",
     "channel": "web",
     "submission_velocity_24h": 0.0,
-    "recent_change_count": 0.0
+    "recent_change_count": 0.0,
+    "duplicate_identity_reference_count": 0.0,
+    "identity_document_consistency": 0.9955,
+    "application_detail_consistency": 0.9355,
+    "contact_reference_consistency": 0.9341,
+    "beneficiary_reference_consistency": 0.9286,
+    "repeat_submission_count": 1.0
   },
   {
     "application_id": "SYNTH-APP-038",
@@ -377,7 +599,13 @@
     "payment_frequency": "annual",
     "channel": "web",
     "submission_velocity_24h": 4.0,
-    "recent_change_count": 1.0
+    "recent_change_count": 1.0,
+    "duplicate_identity_reference_count": 0.0,
+    "identity_document_consistency": 0.9474,
+    "application_detail_consistency": 0.9677,
+    "contact_reference_consistency": 0.9242,
+    "beneficiary_reference_consistency": 0.9689,
+    "repeat_submission_count": 0.0
   },
   {
     "application_id": "SYNTH-APP-039",
@@ -387,7 +615,13 @@
     "payment_frequency": "monthly",
     "channel": "phone",
     "submission_velocity_24h": 1.0,
-    "recent_change_count": 0.0
+    "recent_change_count": 0.0,
+    "duplicate_identity_reference_count": 0.0,
+    "identity_document_consistency": 0.9743,
+    "application_detail_consistency": 0.9579,
+    "contact_reference_consistency": 0.9351,
+    "beneficiary_reference_consistency": 0.9389,
+    "repeat_submission_count": 0.0
   },
   {
     "application_id": "SYNTH-APP-040",
@@ -397,7 +631,13 @@
     "payment_frequency": "monthly",
     "channel": "agent",
     "submission_velocity_24h": 4.0,
-    "recent_change_count": 0.0
+    "recent_change_count": 0.0,
+    "duplicate_identity_reference_count": 0.0,
+    "identity_document_consistency": 0.9842,
+    "application_detail_consistency": 0.9782,
+    "contact_reference_consistency": 0.9423,
+    "beneficiary_reference_consistency": 0.9838,
+    "repeat_submission_count": 0.0
   },
   {
     "application_id": "SYNTH-APP-041",
@@ -407,7 +647,13 @@
     "payment_frequency": "annual",
     "channel": "agent",
     "submission_velocity_24h": 3.0,
-    "recent_change_count": 1.0
+    "recent_change_count": 1.0,
+    "duplicate_identity_reference_count": 0.0,
+    "identity_document_consistency": 0.9812,
+    "application_detail_consistency": 0.9998,
+    "contact_reference_consistency": 0.9948,
+    "beneficiary_reference_consistency": 0.9146,
+    "repeat_submission_count": 1.0
   },
   {
     "application_id": "SYNTH-APP-042",
@@ -417,7 +663,13 @@
     "payment_frequency": "monthly",
     "channel": "agent",
     "submission_velocity_24h": 1.0,
-    "recent_change_count": 0.0
+    "recent_change_count": 0.0,
+    "duplicate_identity_reference_count": 0.0,
+    "identity_document_consistency": 0.9853,
+    "application_detail_consistency": 0.9787,
+    "contact_reference_consistency": 0.976,
+    "beneficiary_reference_consistency": 0.9019,
+    "repeat_submission_count": 1.0
   },
   {
     "application_id": "SYNTH-APP-043",
@@ -427,7 +679,13 @@
     "payment_frequency": "quarterly",
     "channel": "agent",
     "submission_velocity_24h": 2.0,
-    "recent_change_count": 1.0
+    "recent_change_count": 1.0,
+    "duplicate_identity_reference_count": 0.0,
+    "identity_document_consistency": 0.24,
+    "application_detail_consistency": 0.36,
+    "contact_reference_consistency": 0.9067,
+    "beneficiary_reference_consistency": 0.9682,
+    "repeat_submission_count": 0.0
   },
   {
     "application_id": "SYNTH-APP-044",
@@ -437,7 +695,13 @@
     "payment_frequency": "monthly",
     "channel": "phone",
     "submission_velocity_24h": 1.0,
-    "recent_change_count": 0.0
+    "recent_change_count": 0.0,
+    "duplicate_identity_reference_count": 0.0,
+    "identity_document_consistency": 0.9888,
+    "application_detail_consistency": 0.9249,
+    "contact_reference_consistency": 0.9303,
+    "beneficiary_reference_consistency": 0.9512,
+    "repeat_submission_count": 0.0
   },
   {
     "application_id": "SYNTH-APP-045",
@@ -447,7 +711,13 @@
     "payment_frequency": "annual",
     "channel": "agent",
     "submission_velocity_24h": 0.0,
-    "recent_change_count": 1.0
+    "recent_change_count": 1.0,
+    "duplicate_identity_reference_count": 0.0,
+    "identity_document_consistency": 0.9781,
+    "application_detail_consistency": 0.9184,
+    "contact_reference_consistency": 0.9446,
+    "beneficiary_reference_consistency": 0.9668,
+    "repeat_submission_count": 1.0
   },
   {
     "application_id": "SYNTH-APP-046",
@@ -457,7 +727,13 @@
     "payment_frequency": "annual",
     "channel": "web",
     "submission_velocity_24h": 0.0,
-    "recent_change_count": 1.0
+    "recent_change_count": 1.0,
+    "duplicate_identity_reference_count": 0.0,
+    "identity_document_consistency": 0.9598,
+    "application_detail_consistency": 0.9041,
+    "contact_reference_consistency": 0.9649,
+    "beneficiary_reference_consistency": 0.935,
+    "repeat_submission_count": 0.0
   },
   {
     "application_id": "SYNTH-APP-047",
@@ -467,7 +743,13 @@
     "payment_frequency": "monthly",
     "channel": "web",
     "submission_velocity_24h": 1.0,
-    "recent_change_count": 0.0
+    "recent_change_count": 0.0,
+    "duplicate_identity_reference_count": 0.0,
+    "identity_document_consistency": 0.9921,
+    "application_detail_consistency": 0.9011,
+    "contact_reference_consistency": 0.9859,
+    "beneficiary_reference_consistency": 0.9043,
+    "repeat_submission_count": 0.0
   },
   {
     "application_id": "SYNTH-APP-048",
@@ -477,7 +759,13 @@
     "payment_frequency": "quarterly",
     "channel": "phone",
     "submission_velocity_24h": 0.0,
-    "recent_change_count": 2.0
+    "recent_change_count": 2.0,
+    "duplicate_identity_reference_count": 3.0,
+    "identity_document_consistency": 0.9073,
+    "application_detail_consistency": 0.9174,
+    "contact_reference_consistency": 0.9793,
+    "beneficiary_reference_consistency": 0.9236,
+    "repeat_submission_count": 2.0
   },
   {
     "application_id": "SYNTH-APP-049",
@@ -487,7 +775,13 @@
     "payment_frequency": "monthly",
     "channel": "web",
     "submission_velocity_24h": 1.0,
-    "recent_change_count": 0.0
+    "recent_change_count": 0.0,
+    "duplicate_identity_reference_count": 0.0,
+    "identity_document_consistency": 0.9973,
+    "application_detail_consistency": 0.9954,
+    "contact_reference_consistency": 0.9539,
+    "beneficiary_reference_consistency": 0.9164,
+    "repeat_submission_count": 0.0
   },
   {
     "application_id": "SYNTH-APP-050",
@@ -497,7 +791,13 @@
     "payment_frequency": "annual",
     "channel": "phone",
     "submission_velocity_24h": 2.0,
-    "recent_change_count": 1.0
+    "recent_change_count": 1.0,
+    "duplicate_identity_reference_count": 0.0,
+    "identity_document_consistency": 0.965,
+    "application_detail_consistency": 0.9906,
+    "contact_reference_consistency": 0.9558,
+    "beneficiary_reference_consistency": 0.9372,
+    "repeat_submission_count": 0.0
   },
   {
     "application_id": "SYNTH-APP-051",
@@ -507,7 +807,13 @@
     "payment_frequency": "monthly",
     "channel": "phone",
     "submission_velocity_24h": 0.0,
-    "recent_change_count": 0.0
+    "recent_change_count": 0.0,
+    "duplicate_identity_reference_count": 0.0,
+    "identity_document_consistency": 0.9963,
+    "application_detail_consistency": 0.9516,
+    "contact_reference_consistency": 0.9451,
+    "beneficiary_reference_consistency": 0.9128,
+    "repeat_submission_count": 0.0
   },
   {
     "application_id": "SYNTH-APP-052",
@@ -517,7 +823,13 @@
     "payment_frequency": "monthly",
     "channel": "phone",
     "submission_velocity_24h": 2.0,
-    "recent_change_count": 1.0
+    "recent_change_count": 1.0,
+    "duplicate_identity_reference_count": 0.0,
+    "identity_document_consistency": 0.9469,
+    "application_detail_consistency": 0.9817,
+    "contact_reference_consistency": 0.9782,
+    "beneficiary_reference_consistency": 0.9671,
+    "repeat_submission_count": 8.0
   },
   {
     "application_id": "SYNTH-APP-053",
@@ -527,7 +839,13 @@
     "payment_frequency": "monthly",
     "channel": "agent",
     "submission_velocity_24h": 0.0,
-    "recent_change_count": 2.0
+    "recent_change_count": 2.0,
+    "duplicate_identity_reference_count": 0.0,
+    "identity_document_consistency": 0.9828,
+    "application_detail_consistency": 0.906,
+    "contact_reference_consistency": 0.9172,
+    "beneficiary_reference_consistency": 0.9607,
+    "repeat_submission_count": 1.0
   },
   {
     "application_id": "SYNTH-APP-054",
@@ -537,7 +855,13 @@
     "payment_frequency": "monthly",
     "channel": "web",
     "submission_velocity_24h": 0.0,
-    "recent_change_count": 0.0
+    "recent_change_count": 0.0,
+    "duplicate_identity_reference_count": 0.0,
+    "identity_document_consistency": 0.932,
+    "application_detail_consistency": 0.9398,
+    "contact_reference_consistency": 0.9965,
+    "beneficiary_reference_consistency": 0.9902,
+    "repeat_submission_count": 0.0
   },
   {
     "application_id": "SYNTH-APP-055",
@@ -547,7 +871,13 @@
     "payment_frequency": "monthly",
     "channel": "agent",
     "submission_velocity_24h": 1.0,
-    "recent_change_count": 1.0
+    "recent_change_count": 1.0,
+    "duplicate_identity_reference_count": 0.0,
+    "identity_document_consistency": 0.9916,
+    "application_detail_consistency": 0.9466,
+    "contact_reference_consistency": 0.9614,
+    "beneficiary_reference_consistency": 0.9324,
+    "repeat_submission_count": 8.0
   },
   {
     "application_id": "SYNTH-APP-056",
@@ -557,7 +887,13 @@
     "payment_frequency": "quarterly",
     "channel": "phone",
     "submission_velocity_24h": 1.0,
-    "recent_change_count": 2.0
+    "recent_change_count": 2.0,
+    "duplicate_identity_reference_count": 0.0,
+    "identity_document_consistency": 0.9613,
+    "application_detail_consistency": 0.9291,
+    "contact_reference_consistency": 0.9466,
+    "beneficiary_reference_consistency": 0.9801,
+    "repeat_submission_count": 0.0
   },
   {
     "application_id": "SYNTH-APP-057",
@@ -567,7 +903,13 @@
     "payment_frequency": "annual",
     "channel": "web",
     "submission_velocity_24h": 1.0,
-    "recent_change_count": 3.0
+    "recent_change_count": 3.0,
+    "duplicate_identity_reference_count": 0.0,
+    "identity_document_consistency": 0.24,
+    "application_detail_consistency": 0.36,
+    "contact_reference_consistency": 0.9761,
+    "beneficiary_reference_consistency": 0.9672,
+    "repeat_submission_count": 2.0
   },
   {
     "application_id": "SYNTH-APP-058",
@@ -577,7 +919,13 @@
     "payment_frequency": "monthly",
     "channel": "agent",
     "submission_velocity_24h": 0.0,
-    "recent_change_count": 2.0
+    "recent_change_count": 2.0,
+    "duplicate_identity_reference_count": 0.0,
+    "identity_document_consistency": 0.9938,
+    "application_detail_consistency": 0.9184,
+    "contact_reference_consistency": 0.9029,
+    "beneficiary_reference_consistency": 0.9286,
+    "repeat_submission_count": 0.0
   },
   {
     "application_id": "SYNTH-APP-059",
@@ -587,7 +935,13 @@
     "payment_frequency": "monthly",
     "channel": "agent",
     "submission_velocity_24h": 2.0,
-    "recent_change_count": 1.0
+    "recent_change_count": 1.0,
+    "duplicate_identity_reference_count": 0.0,
+    "identity_document_consistency": 0.9955,
+    "application_detail_consistency": 0.9973,
+    "contact_reference_consistency": 0.9673,
+    "beneficiary_reference_consistency": 0.9173,
+    "repeat_submission_count": 1.0
   },
   {
     "application_id": "SYNTH-APP-060",
@@ -597,7 +951,13 @@
     "payment_frequency": "monthly",
     "channel": "web",
     "submission_velocity_24h": 2.0,
-    "recent_change_count": 1.0
+    "recent_change_count": 1.0,
+    "duplicate_identity_reference_count": 3.0,
+    "identity_document_consistency": 0.9232,
+    "application_detail_consistency": 0.9787,
+    "contact_reference_consistency": 0.9345,
+    "beneficiary_reference_consistency": 0.9851,
+    "repeat_submission_count": 0.0
   },
   {
     "application_id": "SYNTH-APP-061",
@@ -607,7 +967,13 @@
     "payment_frequency": "quarterly",
     "channel": "phone",
     "submission_velocity_24h": 1.0,
-    "recent_change_count": 0.0
+    "recent_change_count": 0.0,
+    "duplicate_identity_reference_count": 0.0,
+    "identity_document_consistency": 0.9627,
+    "application_detail_consistency": 0.926,
+    "contact_reference_consistency": 0.9078,
+    "beneficiary_reference_consistency": 0.9389,
+    "repeat_submission_count": 0.0
   },
   {
     "application_id": "SYNTH-APP-062",
@@ -617,7 +983,13 @@
     "payment_frequency": "annual",
     "channel": "phone",
     "submission_velocity_24h": 2.0,
-    "recent_change_count": 2.0
+    "recent_change_count": 2.0,
+    "duplicate_identity_reference_count": 0.0,
+    "identity_document_consistency": 0.9747,
+    "application_detail_consistency": 0.9136,
+    "contact_reference_consistency": 0.9262,
+    "beneficiary_reference_consistency": 0.9017,
+    "repeat_submission_count": 1.0
   },
   {
     "application_id": "SYNTH-APP-063",
@@ -627,7 +999,13 @@
     "payment_frequency": "monthly",
     "channel": "web",
     "submission_velocity_24h": 1.0,
-    "recent_change_count": 2.0
+    "recent_change_count": 2.0,
+    "duplicate_identity_reference_count": 0.0,
+    "identity_document_consistency": 0.9958,
+    "application_detail_consistency": 0.9817,
+    "contact_reference_consistency": 0.994,
+    "beneficiary_reference_consistency": 0.9565,
+    "repeat_submission_count": 0.0
   },
   {
     "application_id": "SYNTH-APP-064",
@@ -637,7 +1015,13 @@
     "payment_frequency": "quarterly",
     "channel": "agent",
     "submission_velocity_24h": 4.0,
-    "recent_change_count": 0.0
+    "recent_change_count": 0.0,
+    "duplicate_identity_reference_count": 0.0,
+    "identity_document_consistency": 0.9885,
+    "application_detail_consistency": 0.9125,
+    "contact_reference_consistency": 0.9634,
+    "beneficiary_reference_consistency": 0.9057,
+    "repeat_submission_count": 2.0
   },
   {
     "application_id": "SYNTH-APP-065",
@@ -647,7 +1031,13 @@
     "payment_frequency": "quarterly",
     "channel": "web",
     "submission_velocity_24h": 1.0,
-    "recent_change_count": 0.0
+    "recent_change_count": 0.0,
+    "duplicate_identity_reference_count": 0.0,
+    "identity_document_consistency": 0.9427,
+    "application_detail_consistency": 0.9958,
+    "contact_reference_consistency": 0.9383,
+    "beneficiary_reference_consistency": 0.9558,
+    "repeat_submission_count": 0.0
   },
   {
     "application_id": "SYNTH-APP-066",
@@ -657,7 +1047,13 @@
     "payment_frequency": "monthly",
     "channel": "web",
     "submission_velocity_24h": 0.0,
-    "recent_change_count": 0.0
+    "recent_change_count": 0.0,
+    "duplicate_identity_reference_count": 0.0,
+    "identity_document_consistency": 0.9454,
+    "application_detail_consistency": 0.9888,
+    "contact_reference_consistency": 0.9922,
+    "beneficiary_reference_consistency": 0.9644,
+    "repeat_submission_count": 0.0
   },
   {
     "application_id": "SYNTH-APP-067",
@@ -667,7 +1063,13 @@
     "payment_frequency": "monthly",
     "channel": "agent",
     "submission_velocity_24h": 1.0,
-    "recent_change_count": 2.0
+    "recent_change_count": 2.0,
+    "duplicate_identity_reference_count": 0.0,
+    "identity_document_consistency": 0.9207,
+    "application_detail_consistency": 0.9779,
+    "contact_reference_consistency": 0.9138,
+    "beneficiary_reference_consistency": 0.9676,
+    "repeat_submission_count": 0.0
   },
   {
     "application_id": "SYNTH-APP-068",
@@ -677,7 +1079,13 @@
     "payment_frequency": "monthly",
     "channel": "agent",
     "submission_velocity_24h": 1.0,
-    "recent_change_count": 0.0
+    "recent_change_count": 0.0,
+    "duplicate_identity_reference_count": 0.0,
+    "identity_document_consistency": 0.9554,
+    "application_detail_consistency": 0.9505,
+    "contact_reference_consistency": 0.9804,
+    "beneficiary_reference_consistency": 0.9092,
+    "repeat_submission_count": 0.0
   },
   {
     "application_id": "SYNTH-APP-069",
@@ -687,7 +1095,13 @@
     "payment_frequency": "monthly",
     "channel": "phone",
     "submission_velocity_24h": 1.0,
-    "recent_change_count": 1.0
+    "recent_change_count": 1.0,
+    "duplicate_identity_reference_count": 0.0,
+    "identity_document_consistency": 0.9264,
+    "application_detail_consistency": 0.935,
+    "contact_reference_consistency": 0.9909,
+    "beneficiary_reference_consistency": 0.9942,
+    "repeat_submission_count": 0.0
   },
   {
     "application_id": "SYNTH-APP-070",
@@ -697,7 +1111,13 @@
     "payment_frequency": "annual",
     "channel": "web",
     "submission_velocity_24h": 0.0,
-    "recent_change_count": 0.0
+    "recent_change_count": 0.0,
+    "duplicate_identity_reference_count": 0.0,
+    "identity_document_consistency": 0.9421,
+    "application_detail_consistency": 0.9445,
+    "contact_reference_consistency": 0.9997,
+    "beneficiary_reference_consistency": 0.9795,
+    "repeat_submission_count": 0.0
   },
   {
     "application_id": "SYNTH-APP-071",
@@ -707,7 +1127,13 @@
     "payment_frequency": "monthly",
     "channel": "phone",
     "submission_velocity_24h": 0.0,
-    "recent_change_count": 2.0
+    "recent_change_count": 2.0,
+    "duplicate_identity_reference_count": 0.0,
+    "identity_document_consistency": 0.9073,
+    "application_detail_consistency": 0.9254,
+    "contact_reference_consistency": 0.939,
+    "beneficiary_reference_consistency": 0.9771,
+    "repeat_submission_count": 0.0
   },
   {
     "application_id": "SYNTH-APP-072",
@@ -717,7 +1143,13 @@
     "payment_frequency": "monthly",
     "channel": "web",
     "submission_velocity_24h": 194.0,
-    "recent_change_count": 72.0
+    "recent_change_count": 72.0,
+    "duplicate_identity_reference_count": 0.0,
+    "identity_document_consistency": 0.9521,
+    "application_detail_consistency": 0.948,
+    "contact_reference_consistency": 0.9653,
+    "beneficiary_reference_consistency": 0.9363,
+    "repeat_submission_count": 2.0
   },
   {
     "application_id": "SYNTH-APP-073",
@@ -727,7 +1159,13 @@
     "payment_frequency": "monthly",
     "channel": "web",
     "submission_velocity_24h": 0.0,
-    "recent_change_count": 4.0
+    "recent_change_count": 4.0,
+    "duplicate_identity_reference_count": 0.0,
+    "identity_document_consistency": 0.9381,
+    "application_detail_consistency": 0.9417,
+    "contact_reference_consistency": 0.9601,
+    "beneficiary_reference_consistency": 0.18,
+    "repeat_submission_count": 0.0
   },
   {
     "application_id": "SYNTH-APP-074",
@@ -737,7 +1175,13 @@
     "payment_frequency": "annual",
     "channel": "phone",
     "submission_velocity_24h": 125.0,
-    "recent_change_count": 77.0
+    "recent_change_count": 77.0,
+    "duplicate_identity_reference_count": 0.0,
+    "identity_document_consistency": 0.9629,
+    "application_detail_consistency": 0.9971,
+    "contact_reference_consistency": 0.9885,
+    "beneficiary_reference_consistency": 0.9122,
+    "repeat_submission_count": 0.0
   },
   {
     "application_id": "SYNTH-APP-075",
@@ -747,7 +1191,13 @@
     "payment_frequency": "monthly",
     "channel": "agent",
     "submission_velocity_24h": 0.0,
-    "recent_change_count": 1.0
+    "recent_change_count": 1.0,
+    "duplicate_identity_reference_count": 0.0,
+    "identity_document_consistency": 0.912,
+    "application_detail_consistency": 0.904,
+    "contact_reference_consistency": 0.9035,
+    "beneficiary_reference_consistency": 0.9288,
+    "repeat_submission_count": 0.0
   },
   {
     "application_id": "SYNTH-APP-076",
@@ -757,7 +1207,13 @@
     "payment_frequency": "monthly",
     "channel": "phone",
     "submission_velocity_24h": 819.0,
-    "recent_change_count": 393.0
+    "recent_change_count": 393.0,
+    "duplicate_identity_reference_count": 0.0,
+    "identity_document_consistency": 0.953,
+    "application_detail_consistency": 0.915,
+    "contact_reference_consistency": 0.9357,
+    "beneficiary_reference_consistency": 0.9678,
+    "repeat_submission_count": 0.0
   },
   {
     "application_id": "SYNTH-APP-077",
@@ -767,7 +1223,13 @@
     "payment_frequency": "monthly",
     "channel": "agent",
     "submission_velocity_24h": 2.0,
-    "recent_change_count": 3.0
+    "recent_change_count": 3.0,
+    "duplicate_identity_reference_count": 0.0,
+    "identity_document_consistency": 0.9402,
+    "application_detail_consistency": 0.9253,
+    "contact_reference_consistency": 0.9174,
+    "beneficiary_reference_consistency": 0.9676,
+    "repeat_submission_count": 1.0
   },
   {
     "application_id": "SYNTH-APP-078",
@@ -777,7 +1239,13 @@
     "payment_frequency": "annual",
     "channel": "phone",
     "submission_velocity_24h": 63.0,
-    "recent_change_count": 62.0
+    "recent_change_count": 62.0,
+    "duplicate_identity_reference_count": 0.0,
+    "identity_document_consistency": 0.9295,
+    "application_detail_consistency": 0.9951,
+    "contact_reference_consistency": 0.9212,
+    "beneficiary_reference_consistency": 0.9607,
+    "repeat_submission_count": 2.0
   },
   {
     "application_id": "SYNTH-APP-079",
@@ -787,7 +1255,13 @@
     "payment_frequency": "monthly",
     "channel": "phone",
     "submission_velocity_24h": 2.0,
-    "recent_change_count": 0.0
+    "recent_change_count": 0.0,
+    "duplicate_identity_reference_count": 0.0,
+    "identity_document_consistency": 0.9248,
+    "application_detail_consistency": 0.9071,
+    "contact_reference_consistency": 0.947,
+    "beneficiary_reference_consistency": 0.9471,
+    "repeat_submission_count": 0.0
   },
   {
     "application_id": "SYNTH-APP-080",
@@ -797,7 +1271,13 @@
     "payment_frequency": "monthly",
     "channel": "web",
     "submission_velocity_24h": 964.0,
-    "recent_change_count": 478.0
+    "recent_change_count": 478.0,
+    "duplicate_identity_reference_count": 0.0,
+    "identity_document_consistency": 0.9706,
+    "application_detail_consistency": 0.9578,
+    "contact_reference_consistency": 0.22,
+    "beneficiary_reference_consistency": 0.997,
+    "repeat_submission_count": 0.0
   },
   {
     "application_id": "SYNTH-APP-081",
@@ -807,7 +1287,13 @@
     "payment_frequency": "monthly",
     "channel": "agent",
     "submission_velocity_24h": 3.0,
-    "recent_change_count": 4.0
+    "recent_change_count": 4.0,
+    "duplicate_identity_reference_count": 0.0,
+    "identity_document_consistency": 0.97,
+    "application_detail_consistency": 0.9638,
+    "contact_reference_consistency": 0.9418,
+    "beneficiary_reference_consistency": 0.9293,
+    "repeat_submission_count": 1.0
   },
   {
     "application_id": "SYNTH-APP-082",
@@ -817,7 +1303,13 @@
     "payment_frequency": "annual",
     "channel": "phone",
     "submission_velocity_24h": 140.0,
-    "recent_change_count": 27.0
+    "recent_change_count": 27.0,
+    "duplicate_identity_reference_count": 1.0,
+    "identity_document_consistency": 0.9089,
+    "application_detail_consistency": 0.9199,
+    "contact_reference_consistency": 0.9796,
+    "beneficiary_reference_consistency": 0.18,
+    "repeat_submission_count": 1.0
   },
   {
     "application_id": "SYNTH-APP-083",
@@ -827,7 +1319,13 @@
     "payment_frequency": "monthly",
     "channel": "agent",
     "submission_velocity_24h": 1.0,
-    "recent_change_count": 1.0
+    "recent_change_count": 1.0,
+    "duplicate_identity_reference_count": 0.0,
+    "identity_document_consistency": 0.9669,
+    "application_detail_consistency": 0.989,
+    "contact_reference_consistency": 0.9359,
+    "beneficiary_reference_consistency": 0.9676,
+    "repeat_submission_count": 0.0
   },
   {
     "application_id": "SYNTH-APP-084",
@@ -837,7 +1335,13 @@
     "payment_frequency": "monthly",
     "channel": "web",
     "submission_velocity_24h": 648.0,
-    "recent_change_count": 314.0
+    "recent_change_count": 314.0,
+    "duplicate_identity_reference_count": 0.0,
+    "identity_document_consistency": 0.9078,
+    "application_detail_consistency": 0.9555,
+    "contact_reference_consistency": 0.9929,
+    "beneficiary_reference_consistency": 0.927,
+    "repeat_submission_count": 1.0
   },
   {
     "application_id": "SYNTH-APP-085",
@@ -847,7 +1351,13 @@
     "payment_frequency": "monthly",
     "channel": "agent",
     "submission_velocity_24h": 2.0,
-    "recent_change_count": 1.0
+    "recent_change_count": 1.0,
+    "duplicate_identity_reference_count": 0.0,
+    "identity_document_consistency": 0.9939,
+    "application_detail_consistency": 0.9431,
+    "contact_reference_consistency": 0.9374,
+    "beneficiary_reference_consistency": 0.9656,
+    "repeat_submission_count": 1.0
   },
   {
     "application_id": "SYNTH-APP-086",
@@ -857,7 +1367,13 @@
     "payment_frequency": "annual",
     "channel": "phone",
     "submission_velocity_24h": 60.0,
-    "recent_change_count": 80.0
+    "recent_change_count": 80.0,
+    "duplicate_identity_reference_count": 0.0,
+    "identity_document_consistency": 0.9582,
+    "application_detail_consistency": 0.9136,
+    "contact_reference_consistency": 0.9484,
+    "beneficiary_reference_consistency": 0.9574,
+    "repeat_submission_count": 1.0
   },
   {
     "application_id": "SYNTH-APP-087",
@@ -867,7 +1383,13 @@
     "payment_frequency": "monthly",
     "channel": "phone",
     "submission_velocity_24h": 0.0,
-    "recent_change_count": 0.0
+    "recent_change_count": 0.0,
+    "duplicate_identity_reference_count": 0.0,
+    "identity_document_consistency": 0.9777,
+    "application_detail_consistency": 0.9479,
+    "contact_reference_consistency": 0.9725,
+    "beneficiary_reference_consistency": 0.9948,
+    "repeat_submission_count": 0.0
   },
   {
     "application_id": "SYNTH-APP-088",
@@ -877,7 +1399,13 @@
     "payment_frequency": "monthly",
     "channel": "phone",
     "submission_velocity_24h": 590.0,
-    "recent_change_count": 145.0
+    "recent_change_count": 145.0,
+    "duplicate_identity_reference_count": 0.0,
+    "identity_document_consistency": 0.9426,
+    "application_detail_consistency": 0.9096,
+    "contact_reference_consistency": 0.9819,
+    "beneficiary_reference_consistency": 0.9386,
+    "repeat_submission_count": 0.0
   },
   {
     "application_id": "SYNTH-APP-089",
@@ -887,7 +1415,13 @@
     "payment_frequency": "monthly",
     "channel": "phone",
     "submission_velocity_24h": 2.0,
-    "recent_change_count": 2.0
+    "recent_change_count": 2.0,
+    "duplicate_identity_reference_count": 0.0,
+    "identity_document_consistency": 0.9935,
+    "application_detail_consistency": 0.9196,
+    "contact_reference_consistency": 0.9834,
+    "beneficiary_reference_consistency": 0.9036,
+    "repeat_submission_count": 2.0
   },
   {
     "application_id": "SYNTH-APP-090",
@@ -897,7 +1431,13 @@
     "payment_frequency": "annual",
     "channel": "phone",
     "submission_velocity_24h": 137.0,
-    "recent_change_count": 37.0
+    "recent_change_count": 37.0,
+    "duplicate_identity_reference_count": 0.0,
+    "identity_document_consistency": 0.9932,
+    "application_detail_consistency": 0.9133,
+    "contact_reference_consistency": 0.9837,
+    "beneficiary_reference_consistency": 0.987,
+    "repeat_submission_count": 1.0
   },
   {
     "application_id": "SYNTH-APP-091",
@@ -907,7 +1447,13 @@
     "payment_frequency": "monthly",
     "channel": "agent",
     "submission_velocity_24h": 2.0,
-    "recent_change_count": 3.0
+    "recent_change_count": 3.0,
+    "duplicate_identity_reference_count": 1.0,
+    "identity_document_consistency": 0.9195,
+    "application_detail_consistency": 0.9261,
+    "contact_reference_consistency": 0.9071,
+    "beneficiary_reference_consistency": 0.917,
+    "repeat_submission_count": 0.0
   },
   {
     "application_id": "SYNTH-APP-092",
@@ -917,7 +1463,13 @@
     "payment_frequency": "monthly",
     "channel": "web",
     "submission_velocity_24h": 905.0,
-    "recent_change_count": 124.0
+    "recent_change_count": 124.0,
+    "duplicate_identity_reference_count": 0.0,
+    "identity_document_consistency": 0.9664,
+    "application_detail_consistency": 0.9267,
+    "contact_reference_consistency": 0.9701,
+    "beneficiary_reference_consistency": 0.96,
+    "repeat_submission_count": 0.0
   },
   {
     "application_id": "SYNTH-APP-093",
@@ -927,7 +1479,13 @@
     "payment_frequency": "monthly",
     "channel": "web",
     "submission_velocity_24h": 0.0,
-    "recent_change_count": 2.0
+    "recent_change_count": 2.0,
+    "duplicate_identity_reference_count": 0.0,
+    "identity_document_consistency": 0.9905,
+    "application_detail_consistency": 0.9868,
+    "contact_reference_consistency": 0.9494,
+    "beneficiary_reference_consistency": 0.18,
+    "repeat_submission_count": 0.0
   },
   {
     "application_id": "SYNTH-APP-094",
@@ -937,7 +1495,13 @@
     "payment_frequency": "annual",
     "channel": "phone",
     "submission_velocity_24h": 121.0,
-    "recent_change_count": 71.0
+    "recent_change_count": 71.0,
+    "duplicate_identity_reference_count": 0.0,
+    "identity_document_consistency": 0.9266,
+    "application_detail_consistency": 0.9692,
+    "contact_reference_consistency": 0.9081,
+    "beneficiary_reference_consistency": 0.18,
+    "repeat_submission_count": 0.0
   },
   {
     "application_id": "SYNTH-APP-095",
@@ -947,7 +1511,13 @@
     "payment_frequency": "monthly",
     "channel": "agent",
     "submission_velocity_24h": 0.0,
-    "recent_change_count": 0.0
+    "recent_change_count": 0.0,
+    "duplicate_identity_reference_count": 0.0,
+    "identity_document_consistency": 0.9128,
+    "application_detail_consistency": 0.9047,
+    "contact_reference_consistency": 0.9484,
+    "beneficiary_reference_consistency": 0.9996,
+    "repeat_submission_count": 1.0
   },
   {
     "application_id": "SYNTH-APP-096",
@@ -957,7 +1527,13 @@
     "payment_frequency": "monthly",
     "channel": "phone",
     "submission_velocity_24h": 157.0,
-    "recent_change_count": 117.0
+    "recent_change_count": 117.0,
+    "duplicate_identity_reference_count": 0.0,
+    "identity_document_consistency": 0.9619,
+    "application_detail_consistency": 0.9797,
+    "contact_reference_consistency": 0.9435,
+    "beneficiary_reference_consistency": 0.9379,
+    "repeat_submission_count": 8.0
   },
   {
     "application_id": "SYNTH-APP-097",
@@ -967,7 +1543,13 @@
     "payment_frequency": "monthly",
     "channel": "web",
     "submission_velocity_24h": 0.0,
-    "recent_change_count": 4.0
+    "recent_change_count": 4.0,
+    "duplicate_identity_reference_count": 0.0,
+    "identity_document_consistency": 0.9995,
+    "application_detail_consistency": 0.9815,
+    "contact_reference_consistency": 0.999,
+    "beneficiary_reference_consistency": 0.9156,
+    "repeat_submission_count": 1.0
   },
   {
     "application_id": "SYNTH-APP-098",
@@ -977,7 +1559,13 @@
     "payment_frequency": "annual",
     "channel": "phone",
     "submission_velocity_24h": 130.0,
-    "recent_change_count": 45.0
+    "recent_change_count": 45.0,
+    "duplicate_identity_reference_count": 0.0,
+    "identity_document_consistency": 0.9895,
+    "application_detail_consistency": 0.9097,
+    "contact_reference_consistency": 0.9161,
+    "beneficiary_reference_consistency": 0.9913,
+    "repeat_submission_count": 0.0
   },
   {
     "application_id": "SYNTH-APP-099",
@@ -987,7 +1575,13 @@
     "payment_frequency": "monthly",
     "channel": "phone",
     "submission_velocity_24h": 3.0,
-    "recent_change_count": 2.0
+    "recent_change_count": 2.0,
+    "duplicate_identity_reference_count": 3.0,
+    "identity_document_consistency": 0.9144,
+    "application_detail_consistency": 0.9758,
+    "contact_reference_consistency": 0.9243,
+    "beneficiary_reference_consistency": 0.9477,
+    "repeat_submission_count": 0.0
   },
   {
     "application_id": "SYNTH-APP-100",
@@ -997,6 +1591,12 @@
     "payment_frequency": "monthly",
     "channel": "web",
     "submission_velocity_24h": 217.0,
-    "recent_change_count": 487.0
+    "recent_change_count": 487.0,
+    "duplicate_identity_reference_count": 0.0,
+    "identity_document_consistency": 0.9344,
+    "application_detail_consistency": 0.9938,
+    "contact_reference_consistency": 0.9976,
+    "beneficiary_reference_consistency": 0.18,
+    "repeat_submission_count": 1.0
   }
 ]

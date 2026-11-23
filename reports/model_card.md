@@ -10,11 +10,11 @@ This model is not validated or authorized for real applications, fraud determina
 
 ## Data and inputs
 
-Only deterministic synthetic data. Model inputs are policy type, requested coverage, deductible, payment frequency, channel, synthetic submission velocity, and synthetic recent-change count. The API may carry an application ID for request/result matching, but it is excluded from model input. Age and income can appear as separate demo display context; they are not model inputs or evaluation labels. Some operational variables could still be inappropriate in a real context and require careful review.
+Only deterministic synthetic data. The preserved VAE model inputs are exactly seven fields: policy type, requested coverage, deductible, payment frequency, channel, submission velocity, and recent-change count. Optional opaque-reference, consistency, and repeated-submission values can be supplied separately to transparent synthetic demo flag rules; they are never encoded, scored, or used for calibration. They contain no identity values or personal data and do not verify identity. The API may carry an application ID for result matching, but it is excluded from both model features and flag rules. Age and income are synthetic display context only, not model inputs or evaluation labels.
 
 ## Measurement and limitations
 
-The threshold is the 99th percentile of a separate synthetic baseline calibration set. It has no demonstrated relationship to real-world risk. Scores are unbounded reconstruction errors in a learned representation; valid inputs far outside the training range can produce very large scores. Per-feature residuals are statistical differences, not causal explanations. Synthetic examples do not support claims about accuracy, precision, recall, fairness, or effectiveness. The model may be sensitive to distribution, data-quality, and category changes.
+The preserved version `1.0.0-demo` uses its original seven-feature weights, fitted preprocessing, and 99th-percentile threshold `0.06842832267284393`. The threshold has no demonstrated relationship to real-world risk. Scores are unbounded reconstruction errors; valid inputs far outside the training range can produce very large scores. Per-feature residuals are statistical differences, not causal explanations. The separate flag rules use explicit synthetic demo thresholds and are not model outputs. Synthetic examples do not support claims about real-world accuracy, fairness, or effectiveness.
 
 ## Human review and governance
 

@@ -18,6 +18,10 @@ test('joins shuffled scores and labels by stable application ID and computes all
   assert.equal(result.precision, 0.5);
   assert.equal(result.recall, 0.5);
   assert.equal(result.falsePositiveRate, 0.5);
+  assert.equal(result.accuracy, 0.5);
+  assert.equal(result.f1, 0.5);
+  assert.equal(result.rocAuc, 0.5); // all raw scores tie, so AUC gives half credit
+  assert.deepEqual(result.confusionMatrix, { truePositive: 1, falseNegative: 1, falsePositive: 1, trueNegative: 1 });
   assert.equal(result.rows.find((row) => row.id === 'U1').evaluationOutcome, 'missed_false_negative');
   assert.equal(result.rows.find((row) => row.id === 'T1').evaluationOutcome, 'flagged_false_positive');
 });
@@ -45,9 +49,13 @@ test('reports zero-denominator metrics as null rather than NaN or infinity', () 
   assert.equal(noFlags.precision, null); // no flagged predictions
   assert.equal(noFlags.recall, 0);
   assert.equal(noFlags.falsePositiveRate, 0);
+  assert.equal(noFlags.f1, 0);
+  assert.equal(noFlags.accuracy, 0.5);
+  assert.equal(noFlags.rocAuc, 0.5);
 
   const noTypicalRecords = evaluateLabeledScores([scored('U1', true)], sidecar([['U1', 'unusual_synthetic']]));
   assert.equal(noTypicalRecords.falsePositiveRate, null); // no actual negatives
+  assert.equal(noTypicalRecords.rocAuc, null);
 });
 
 test('rejects duplicate IDs, unknown labels, and unscored examples', () => {

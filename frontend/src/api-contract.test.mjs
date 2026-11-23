@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { normalizeApplicationsPayload, normalizeBatchPayload, normalizeDemoPayload, normalizeDisplayContext, normalizeUploadPayload } from './api-contract.mjs';
+import { buildApplicationFlags, filterFlaggedRows } from './flagging.mjs';
 
 const sample = {
   application_id: 'DEMO-NORM-001', policy_type: 'auto', requested_coverage: 50000,
@@ -12,6 +13,7 @@ test('normalizes model-supported fields and maps the batch scoring contract', ()
   const records = normalizeDemoPayload({ count: 1, samples: [sample], disclaimer: 'synthetic' });
   assert.equal(records[0].id, 'DEMO-NORM-001');
   assert.equal(records[0].application.requested_coverage, 50000);
+  assert.equal(records[0].application.identity_document_consistency, 0.98);
   const [scored] = normalizeBatchPayload({ results: [{
     application_id: records[0].id, anomaly_score: 0.09,
     threshold: 0.15, review_recommended: false,
@@ -21,6 +23,7 @@ test('normalizes model-supported fields and maps the batch scoring contract', ()
   assert.equal(scored.threshold, 0.15);
   assert.equal(scored.review, false);
   assert.deepEqual(scored.deviations[0], { feature: 'requested_coverage', residual: 0.4 });
+  assert.deepEqual(scored.featureDeviations, undefined);
   assert.equal(normalizeDemoPayload({ samples: [{ ...sample, application_id: 'DEMO-ANOM-001' }] })[0].demoGroup, undefined);
 });
 
@@ -70,4 +73,23 @@ test('matches synthetic display context by ID and keeps it out of model inputs',
   const context = normalizeDisplayContext({ records: [{ application_id: uploads[0].id, applicant_age: 41, annual_income_estimate: 90000 }] }, [uploads[0].id]);
   assert.equal(context.get(uploads[0].id).annual_income_estimate, 90000);
   assert.throws(() => normalizeDisplayContext({ records: [] }, [uploads[0].id]), /IDs do not match/);
+});
+
+test('normalizes documented backend flags and rejects malformed flag structures clearly', () => {
+  const records = normalizeDemoPayload({ samples: [sample] });
+  const response = { results: [{ application_id: sample.application_id, anomaly_score: 0.2, threshold: 0.15, review_recommended: true, feature_deviations: { requested_coverage: 0.12, channel: 0.22 }, flags: [{ code: 'review_suggested', category: 'model', name: 'Review Suggested', severity: 'review', triggering_value: 0.2, reference: '> 0.15', explanation: 'Human review.' }] }] };
+  const [row] = normalizeBatchPayload(response, records);
+  assert.equal(row.flags[0].triggeringValue, 0.2);
+  assert.deepEqual(row.featureDeviations.map((item) => item.feature), ['channel', 'requested_coverage']);
+  assert.equal(buildApplicationFlags(row)[0].name, 'Review Suggested');
+  assert.deepEqual(filterFlaggedRows([row], { category: 'model', severity: 'review' }).map((item) => item.id), [sample.application_id]);
+  assert.throws(() => normalizeBatchPayload({ results: [{ ...response.results[0], flags: [{ name: 'bad' }] }] }, records), /malformed application flag/);
+  assert.throws(() => normalizeBatchPayload({ results: [{ ...response.results[0], feature_deviations: { channel: 'bad' } }] }, records), /invalid feature reconstruction error/);
+});
+
+test('keeps malformed upload inputs visible as data-quality issues for withholding before scoring', () => {
+  const [record] = normalizeUploadPayload([{ application_id: 'UPLOAD-BAD-1', policy_type: 'auto', mystery_value: 12 }]);
+  assert.equal(record.dataQualityIssues.some((issue) => issue.field === 'requested_coverage'), true);
+  assert.equal(record.dataQualityIssues.some((issue) => issue.field === 'mystery_value'), true);
+  assert.equal(record.application.mystery_value, undefined);
 });

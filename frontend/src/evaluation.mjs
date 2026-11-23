@@ -35,7 +35,7 @@ export function evaluateLabeledScores(scoredRecords, sidecar) {
     if (labelsById.has(label.application_id)) {
       throw new Error(`Evaluation sidecar contains duplicate application_id "${label.application_id}".`);
     }
-    labelsById.set(label.application_id, label.demo_label);
+    labelsById.set(label.application_id, label);
   }
 
   const scoresById = new Map();
@@ -57,24 +57,40 @@ export function evaluateLabeledScores(scoredRecords, sidecar) {
 
   const counts = { truePositives: 0, falseNegatives: 0, falsePositives: 0, trueNegatives: 0 };
   const rows = [...scoresById.entries()].map(([id, record]) => {
-    const demoLabel = labelsById.get(id);
+    const labelRecord = labelsById.get(id);
+    const demoLabel = labelRecord.demo_label;
     const intentionallyUnusual = demoLabel === 'unusual_synthetic';
     let outcome;
     if (intentionallyUnusual && record.review) { counts.truePositives += 1; outcome = 'flagged_true_positive'; }
     else if (intentionallyUnusual) { counts.falseNegatives += 1; outcome = 'missed_false_negative'; }
     else if (record.review) { counts.falsePositives += 1; outcome = 'flagged_false_positive'; }
     else { counts.trueNegatives += 1; outcome = 'not_flagged_true_negative'; }
-    return { ...record, demoLabel, evaluationOutcome: outcome };
+    return { ...record, demoLabel, scenario: labelRecord.scenario, scenarioDescription: labelRecord.scenario_description, evaluationOutcome: outcome };
   });
 
   const positivePredictive = counts.truePositives + counts.falsePositives;
   const actualPositives = counts.truePositives + counts.falseNegatives;
   const actualNegatives = counts.falsePositives + counts.trueNegatives;
+  const positives = rows.filter((row) => row.demoLabel === 'unusual_synthetic').map((row) => row.score);
+  const negatives = rows.filter((row) => row.demoLabel === 'typical_synthetic').map((row) => row.score);
+  const rocAuc = positives.length && negatives.length
+    ? positives.reduce((sum, positive) => sum + negatives.reduce((wins, negative) => wins + (positive > negative ? 1 : positive === negative ? 0.5 : 0), 0), 0) / (positives.length * negatives.length)
+    : null;
+  const f1Denominator = (2 * counts.truePositives) + counts.falsePositives + counts.falseNegatives;
   return {
     rows,
     counts,
+    confusionMatrix: {
+      truePositive: counts.truePositives, falseNegative: counts.falseNegatives,
+      falsePositive: counts.falsePositives, trueNegative: counts.trueNegatives,
+    },
+    typicalCount: negatives.length,
+    unusualCount: positives.length,
+    accuracy: rate(counts.truePositives + counts.trueNegatives, rows.length),
     precision: rate(counts.truePositives, positivePredictive),
     recall: rate(counts.truePositives, actualPositives),
+    f1: rate(2 * counts.truePositives, f1Denominator),
     falsePositiveRate: rate(counts.falsePositives, actualNegatives),
+    rocAuc,
   };
 }

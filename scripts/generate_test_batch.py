@@ -1,4 +1,4 @@
-"""Generate a reproducible 100-record batch using the VAE's current API feature schema."""
+"""Generate original-schema synthetic records and separate flag-only demo evidence."""
 import json
 import random
 from pathlib import Path
@@ -15,6 +15,37 @@ FEATURE_FIELDS = [
     "policy_type", "requested_coverage", "deductible", "payment_frequency",
     "channel", "submission_velocity_24h", "recent_change_count",
 ]
+FLAG_EVIDENCE_FIELDS = [
+    "duplicate_identity_reference_count", "identity_document_consistency",
+    "application_detail_consistency", "contact_reference_consistency",
+    "beneficiary_reference_consistency", "repeat_submission_count",
+]
+
+
+def flag_evidence(rng):
+    """Generate independent synthetic flag values; never derive them from labels."""
+    evidence = {
+        "duplicate_identity_reference_count": float(rng.choices([0, 1], [97, 3])[0]),
+        "identity_document_consistency": round(rng.uniform(.90, 1), 4),
+        "application_detail_consistency": round(rng.uniform(.90, 1), 4),
+        "contact_reference_consistency": round(rng.uniform(.90, 1), 4),
+        "beneficiary_reference_consistency": round(rng.uniform(.90, 1), 4),
+        "repeat_submission_count": float(rng.choices([0, 1, 2], [65, 27, 8])[0]),
+    }
+    # Fixed synthetic examples exercise the separate rules without using labels.
+    case = rng.randrange(24)
+    if case == 0:
+        evidence["duplicate_identity_reference_count"] = 3.0
+    elif case == 1:
+        evidence["identity_document_consistency"] = .24
+        evidence["application_detail_consistency"] = .36
+    elif case == 2:
+        evidence["repeat_submission_count"] = 8.0
+    elif case == 3:
+        evidence["beneficiary_reference_consistency"] = .18
+    elif case == 4:
+        evidence["contact_reference_consistency"] = .22
+    return evidence
 
 
 def typical_record(rng, app_id):
@@ -78,6 +109,7 @@ def unusual_record(rng, app_id, scenario):
 def generate():
     rng = random.Random(SEED)
     display_rng = random.Random(SEED + 1)
+    flag_rng = random.Random(SEED + 2)
     applications = []
     labels = []
     display_rows = []
@@ -96,11 +128,16 @@ def generate():
         labels.append({"application_id": app_id, "demo_label": "unusual_synthetic", "scenario": scenario})
         display_rows.append({"application_id": app_id, "applicant_age": display_rng.randint(20, 78), "annual_income_estimate": display_rng.choice([28000, 36000, 48000, 62000, 78000, 95000, 125000, 165000, 220000])})
 
+    # Flag evidence uses an independent RNG stream and is not derived from labels,
+    # model inputs, or the application generation branch.
+    for application in applications:
+        application.update(flag_evidence(flag_rng))
+
     DATA_DIR.mkdir(parents=True, exist_ok=True)
     (DATA_DIR / "test_batch_100.json").write_text(json.dumps(applications, indent=2) + "\n")
     (DATA_DIR / "test_batch_100_labels.json").write_text(json.dumps({"seed": SEED, "labels": labels}, indent=2) + "\n")
     (DATA_DIR / "test_batch_100_display.json").write_text(json.dumps({"synthetic_only": True, "records": display_rows}, indent=2) + "\n")
-    print(f"Generated {len(applications)} model-schema records ({TYPICAL_COUNT} typical, {UNUSUAL_COUNT} unusual) in {DATA_DIR}")
+    print(f"Generated {len(applications)} synthetic records with {len(FEATURE_FIELDS)} VAE features and separate flag evidence in {DATA_DIR}")
 
 
 if __name__ == "__main__":

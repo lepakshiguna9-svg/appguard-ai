@@ -1,4 +1,5 @@
-const numberFormat = new Intl.NumberFormat('en-US', { maximumSignificantDigits: 12 });
+// Display compactly without mutating the numeric score or threshold used for decisions.
+const numberFormat = new Intl.NumberFormat('en-US', { maximumSignificantDigits: 8 });
 const ratioFormat = new Intl.NumberFormat('en-US', { maximumSignificantDigits: 6 });
 
 export function scorePresentation(score, threshold) {

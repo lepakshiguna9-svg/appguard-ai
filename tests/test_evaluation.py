@@ -27,6 +27,10 @@ def test_evaluation_joins_by_id_not_result_or_label_order():
     assert evaluation["precision"] == 0.5
     assert evaluation["recall"] == 0.5
     assert evaluation["false_positive_rate"] == 0.5
+    assert evaluation["accuracy"] == 0.5
+    assert evaluation["f1"] == 0.5
+    assert evaluation["roc_auc"] == 0.5
+    assert evaluation["confusion_matrix"] == {"true_positive": 1, "false_negative": 1, "false_positive": 1, "true_negative": 1}
 
 
 def test_mismatched_ids_and_missing_labels_fail_clearly():
@@ -48,11 +52,22 @@ def test_zero_denominator_metrics_are_null():
     assert no_flags["precision"] is None
     assert no_flags["recall"] == 0
     assert no_flags["false_positive_rate"] == 0
+    assert no_flags["accuracy"] == 0.5
+    assert no_flags["f1"] == 0
+    assert no_flags["roc_auc"] == 0.5
 
     no_negatives = evaluate_labeled_results(
         [{"application_id": "U1"}], [result("U1", True)], labels(("U1", "unusual_synthetic")),
     )
     assert no_negatives["false_positive_rate"] is None
+    assert no_negatives["roc_auc"] is None
+
+
+def test_auc_uses_raw_score_ranking_and_ties_get_half_credit():
+    apps = [{"application_id": "T"}, {"application_id": "U"}]
+    outputs = [dict(result("T", False), anomaly_score=0.3), dict(result("U", True), anomaly_score=0.3)]
+    score = evaluate_labeled_results(apps, outputs, labels(("T", "typical_synthetic"), ("U", "unusual_synthetic")))
+    assert score["roc_auc"] == 0.5
 
 
 def test_duplicate_ids_and_invalid_labels_are_rejected():

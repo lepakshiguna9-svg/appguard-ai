@@ -1,12 +1,13 @@
 """Versioned API for synthetic educational anomaly scoring."""
-import json, logging
+import json, logging, math
 from contextlib import asynccontextmanager
 from pathlib import Path
 from fastapi import FastAPI, Request
 from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
-from app.config import ARTIFACT_PATH, CATEGORICAL, FEATURES, METADATA_PATH, NUMERIC, UNUSUAL_PATH, TRAIN_PATH
+from app.config import ARTIFACT_PATH, CATEGORICAL, FEATURES, METADATA_PATH, MODEL_VERSION, NUMERIC, UNUSUAL_PATH, TRAIN_PATH
 from app.model import Preprocessor, VAE, read_csv, review_recommended, score_rows
+from app.flagging import FLAG_EVIDENCE_FIELDS, build_application_flags
 from app.schemas import Application, BatchRequest, BatchResponse, DemoSamples, ScoreResponse
 
 logging.basicConfig(level=logging.INFO, format="%(levelname)s %(message)s")
@@ -14,19 +15,62 @@ log=logging.getLogger("appguard")
 DISCLAIMER="Anomaly score indicates statistical deviation from synthetic baseline patterns. It is not a finding of fraud or an automated decision. A qualified human must review any follow-up."
 state={}
 
+
+def validate_bundle_metadata(meta):
+    """Fail at startup when model weights, feature order, scaler or calibration disagree."""
+    if meta.get("model_version") != MODEL_VERSION:
+        raise RuntimeError(f"Model bundle version mismatch: expected {MODEL_VERSION}, got {meta.get('model_version')!r}.")
+    if meta.get("artifact") != ARTIFACT_PATH.name:
+        raise RuntimeError(f"Model metadata points to {meta.get('artifact')!r}, expected {ARTIFACT_PATH.name!r}.")
+    if meta.get("feature_schema") != FEATURES:
+        raise RuntimeError("Model metadata feature order does not match the API scoring schema.")
+    if meta.get("encoded_feature_order") != CATEGORICAL + NUMERIC:
+        raise RuntimeError("Model metadata encoded feature order does not match the preprocessor.")
+
+    pre_meta = meta.get("preprocessor")
+    if not isinstance(pre_meta, dict):
+        raise RuntimeError("Model metadata is missing the fitted training preprocessor.")
+    categories = pre_meta.get("categories")
+    means = pre_meta.get("means")
+    stds = pre_meta.get("stds")
+    if not isinstance(categories, dict) or set(categories) != set(CATEGORICAL):
+        raise RuntimeError("Model preprocessor categorical fields do not match the model feature schema.")
+    for field in CATEGORICAL:
+        values = categories[field]
+        if (not isinstance(values, list) or not all(isinstance(value, str) for value in values)
+                or len(values) != len(set(values)) or not {"__missing__", "__unknown__"}.issubset(values)):
+            raise RuntimeError(f"Model preprocessor categories for {field} are malformed or lack reserved values.")
+    if not isinstance(means, dict) or not isinstance(stds, dict) or set(means) != set(NUMERIC) or set(stds) != set(NUMERIC):
+        raise RuntimeError("Model preprocessor numeric scaler fields do not match the model feature schema.")
+    for field in NUMERIC:
+        mean, std = means[field], stds[field]
+        if not isinstance(mean, (int, float)) or not math.isfinite(mean):
+            raise RuntimeError(f"Model preprocessor mean for {field} is not finite.")
+        if not isinstance(std, (int, float)) or not math.isfinite(std) or std <= 0:
+            raise RuntimeError(f"Model preprocessor standard deviation for {field} must be finite and positive.")
+
+    encoded_dim = sum(len(categories[field]) for field in CATEGORICAL) + len(NUMERIC)
+    if meta.get("input_dim") != encoded_dim:
+        raise RuntimeError(f"Model input dimension mismatch: metadata says {meta.get('input_dim')}, preprocessor encodes {encoded_dim}.")
+    calibration = meta.get("calibration")
+    threshold = calibration.get("threshold") if isinstance(calibration, dict) else None
+    if not isinstance(threshold, (int, float)) or not math.isfinite(threshold) or threshold < 0:
+        raise RuntimeError("Model calibration threshold must be a finite, non-negative number.")
+    return Preprocessor.from_dict(pre_meta)
+
 @asynccontextmanager
 async def lifespan(app):
     if not ARTIFACT_PATH.exists() or not METADATA_PATH.exists():
         raise RuntimeError("Demo model artifact missing; run python scripts/train_model.py")
     meta=json.loads(METADATA_PATH.read_text())
-    if meta.get("feature_schema") != FEATURES:
-        raise RuntimeError("Model metadata feature order does not match the API scoring schema.")
-    if meta.get("encoded_feature_order") != CATEGORICAL + NUMERIC:
-        raise RuntimeError("Model metadata encoded feature order does not match the preprocessor.")
-    pre=Preprocessor.from_dict(meta["preprocessor"])
+    pre=validate_bundle_metadata(meta)
     model=VAE(meta["input_dim"],tuple(meta["hidden_sizes"]),meta["latent_size"])
     checkpoint=__import__("torch").load(ARTIFACT_PATH,map_location="cpu",weights_only=True)
-    model.load_state_dict(checkpoint["state_dict"]); model.eval()
+    try:
+        model.load_state_dict(checkpoint["state_dict"])
+    except (KeyError, RuntimeError) as exc:
+        raise RuntimeError(f"Model weights are incompatible with bundle {meta['model_version']} and its fitted preprocessor.") from exc
+    model.eval()
     state.update(meta=meta,pre=pre,model=model)
     log.info("Loaded model version %s",meta["model_version"])
     yield
@@ -49,7 +93,7 @@ def health(): return {"status":"healthy","model_loaded":bool(state),"model_versi
 @app.get("/api/v1/model-info")
 def model_info():
     m=state["meta"]
-    return {"model_version":m["model_version"],"feature_schema":m["feature_schema"],"calibration":m["calibration"],"intended_use":"Synthetic demonstration and software evaluation only","human_review_required":True,"disclaimer":DISCLAIMER}
+    return {"model_version":m["model_version"],"feature_schema":m["feature_schema"],"flag_evidence_schema":FLAG_EVIDENCE_FIELDS,"calibration":m["calibration"],"intended_use":"Synthetic demonstration and software evaluation only","human_review_required":True,"disclaimer":DISCLAIMER}
 
 @app.get("/api/v1/demo/samples",response_model=DemoSamples)
 def demo_samples():
@@ -63,7 +107,14 @@ def score(applications):
     # Keep the stable ID in the response but never pass it to the VAE/preprocessor.
     rows=[a.model_dump(include=set(FEATURES)) for a in applications]
     outputs=score_rows(state["model"],state["pre"],rows); threshold=state["meta"]["calibration"]["threshold"]
-    return [ScoreResponse(application_id=application.application_id,model_version=state["meta"]["model_version"],anomaly_score=s,threshold=threshold,review_recommended=review_recommended(s,threshold),feature_deviations=d,top_deviations=t,disclaimer=DISCLAIMER) for application,(s,d,t) in zip(applications,outputs)]
+    responses=[]
+    for application,(s,d,t) in zip(applications,outputs):
+        review=review_recommended(s,threshold)
+        # Flags may inspect separately validated synthetic evidence, but it never enters
+        # the VAE vector above. The application ID and labels are not flag evidence.
+        flag_input=application.model_dump(exclude={"application_id"})
+        responses.append(ScoreResponse(application_id=application.application_id,model_version=state["meta"]["model_version"],anomaly_score=s,threshold=threshold,review_recommended=review,feature_deviations=d,top_deviations=t,flags=build_application_flags(flag_input,s,threshold,review),disclaimer=DISCLAIMER))
+    return responses
 
 @app.post("/api/v1/score",response_model=ScoreResponse)
 def score_one(application: Application): return score([application])[0]
